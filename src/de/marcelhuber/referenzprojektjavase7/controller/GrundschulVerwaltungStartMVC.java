@@ -1,6 +1,6 @@
 package de.marcelhuber.referenzprojektjavase7.controller;
 // Hinweis: Nachfragen, ob diese "Starklasse" in ein eigenes Package gehört
-//          bzw. ausgelagert bzgl. der M-V-V packages
+//          bzw. ausgelagert bzgl. der M-V-V packages...
 
 import de.marcelhuber.referenzprojektjavase7.model.GrundschulVerwaltungGesamtModel;
 import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungGUI;
