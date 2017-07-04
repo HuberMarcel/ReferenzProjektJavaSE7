@@ -2,13 +2,22 @@ package de.marcelhuber.referenzprojektjavase7.view;
 // TODO: Die ganzen abstrakten Methoden sind zu implementieren
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
+import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import java.util.Calendar;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Marcel Huber
  */
 public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements GrundschulVerwaltungView {
+
+    private MenschDatenKonkret mdk;
+    private String geburtsname;
+    private String familienname;
+    private String vorname;
+    private String zweitname;
+    private String geburtsdatum;
 
     /**
      * Creates new form GrundschulVerwaltungGUI01
@@ -157,6 +166,11 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jButtonCreatePerson.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jButtonCreatePerson.setText("Neue Person anlegen");
+        jButtonCreatePerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreatePersonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -240,6 +254,25 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private void jCheckBoxUnterrichtsfaecherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUnterrichtsfaecherActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxUnterrichtsfaecherActionPerformed
+
+    private void jButtonCreatePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreatePersonActionPerformed
+        boolean allInformationsForMdkAreGiven = false;
+        geburtsname = checkStringAndRequestFocus(jTextGeburtsname);
+        familienname = checkStringAndRequestFocus(jTextFamilienname);
+        vorname = checkStringAndRequestFocus(jTextVorname);
+        zweitname = checkStringAndRequestFocus(jTextZweitname);
+
+        mdk = new MenschDatenKonkret.Builder().build();
+    }//GEN-LAST:event_jButtonCreatePersonActionPerformed
+
+    private String checkStringAndRequestFocus(JTextField textfeld) {
+        String eingabeText = textfeld.getText().trim();
+        if (eingabeText.length() == 0) {
+            textfeld.requestFocus();
+            textfeld.selectAll();
+        }
+        return eingabeText;
+    }
 
     /**
      * @param args the command line arguments

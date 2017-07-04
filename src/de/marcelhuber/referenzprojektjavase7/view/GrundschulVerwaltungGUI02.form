@@ -303,6 +303,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Neue Person anlegen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCreatePersonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
