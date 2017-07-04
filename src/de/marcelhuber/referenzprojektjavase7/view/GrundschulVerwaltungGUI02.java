@@ -38,9 +38,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jLabelGeburtsdatum = new javax.swing.JLabel();
         jFormattedTextMenschGeburtsdatum = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPaneUnterrichtsfaecher = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemDirektor = new javax.swing.JMenuItem();
@@ -98,11 +98,11 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFixMenschLayout.createSequentialGroup()
                 .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelGeburtsdatum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelFamilienname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelVorname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelZweitname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelGeburtsname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelGeburtsname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelGeburtsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
@@ -110,7 +110,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                     .addComponent(jTextVorname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFamilienname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextGeburtsname, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelFixMenschLayout.setVerticalGroup(
             jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,16 +135,8 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelGeburtsdatum)
                     .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179))
+                .addGap(283, 283, 283))
         );
-
-        jCheckBox1.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
-        jCheckBox1.setText("Unterrichtsfächer");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
 
         jList2.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jList2.setModel(new javax.swing.AbstractListModel() {
@@ -154,16 +146,23 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         });
         jScrollPaneUnterrichtsfaecher.setViewportView(jList2);
 
+        jCheckBox1.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jCheckBox1.setText("Unterrichtsfächer");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
-                .addGap(293, 293, 293))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +171,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox1)
                     .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -203,15 +202,15 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelFixMensch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelFixMensch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelFixMensch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelFixMensch, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
