@@ -3,8 +3,7 @@ package de.marcelhuber.referenzprojektjavase7.controller;
 //          bzw. ausgelagert bzgl. der M-V-V packages...
 
 import de.marcelhuber.referenzprojektjavase7.model.GrundschulVerwaltungGesamtModel;
-import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungGUI;
-import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungGUI01;
+import de.marcelhuber.referenzprojektjavase7.view.*;
 import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungView;
 
 /**
@@ -31,7 +30,7 @@ public class GrundschulVerwaltungStartMVC {
 
     private GrundschulVerwaltungView getView() {
 //        return new GrundschulVerwaltungGUI();
-        return new GrundschulVerwaltungGUI01();
+        return new GrundschulVerwaltungGUI02();
     }
 
 }

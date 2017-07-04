@@ -355,6 +355,18 @@ public class GrundschulVerwaltungGUI01 extends javax.swing.JFrame implements Gru
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jTextMenschVornameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMenschVornameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextMenschVornameActionPerformed
+
+    private void jTextMenschGeburtsnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMenschGeburtsnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextMenschGeburtsnameActionPerformed
+
     private void jTextVornameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVornameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextVornameActionPerformed
@@ -362,18 +374,6 @@ public class GrundschulVerwaltungGUI01 extends javax.swing.JFrame implements Gru
     private void jTextGeburtsnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextGeburtsnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextGeburtsnameActionPerformed
-
-    private void jTextMenschGeburtsnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMenschGeburtsnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextMenschGeburtsnameActionPerformed
-
-    private void jTextMenschVornameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMenschVornameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextMenschVornameActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
