@@ -39,8 +39,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jFormattedTextMenschGeburtsdatum = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPaneUnterrichtsfaecher = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jListUnterrichtsfaecher = new javax.swing.JList();
+        jCheckBoxUnterrichtsfaecher = new javax.swing.JCheckBox();
+        jButtonCreatePerson = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemDirektor = new javax.swing.JMenuItem();
@@ -138,30 +139,36 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 .addGap(283, 283, 283))
         );
 
-        jList2.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        jListUnterrichtsfaecher.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jListUnterrichtsfaecher.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Fach 01", "Fach 02", "Fach 03" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPaneUnterrichtsfaecher.setViewportView(jList2);
+        jScrollPaneUnterrichtsfaecher.setViewportView(jListUnterrichtsfaecher);
 
-        jCheckBox1.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
-        jCheckBox1.setText("Unterrichtsfächer");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxUnterrichtsfaecher.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jCheckBoxUnterrichtsfaecher.setText("Unterrichtsfächer");
+        jCheckBoxUnterrichtsfaecher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxUnterrichtsfaecherActionPerformed(evt);
             }
         });
+
+        jButtonCreatePerson.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jButtonCreatePerson.setText("Neue Person anlegen");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonCreatePerson)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(336, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,9 +176,11 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBoxUnterrichtsfaecher)
                     .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addComponent(jButtonCreatePerson)
+                .addContainerGap())
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -228,9 +237,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextVornameActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxUnterrichtsfaecherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUnterrichtsfaecherActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxUnterrichtsfaecherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,14 +277,15 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton jButtonCreatePerson;
+    private javax.swing.JCheckBox jCheckBoxUnterrichtsfaecher;
     private javax.swing.JFormattedTextField jFormattedTextMenschGeburtsdatum;
     private javax.swing.JLabel jLabelFamilienname;
     private javax.swing.JLabel jLabelGeburtsdatum;
     private javax.swing.JLabel jLabelGeburtsname;
     private javax.swing.JLabel jLabelVorname;
     private javax.swing.JLabel jLabelZweitname;
-    private javax.swing.JList jList2;
+    private javax.swing.JList jListUnterrichtsfaecher;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemDirektor;
