@@ -18,6 +18,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private String vorname;
     private String zweitname;
     private String geburtsdatum;
+    private Byte textfeldNummer;
 
     /**
      * Creates new form GrundschulVerwaltungGUI01
@@ -256,17 +257,104 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     }//GEN-LAST:event_jCheckBoxUnterrichtsfaecherActionPerformed
 
     private void jButtonCreatePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreatePersonActionPerformed
-        boolean allInformationsForMdkAreGiven = false;
-        geburtsname = checkStringAndRequestFocus(jTextGeburtsname);
-        familienname = checkStringAndRequestFocus(jTextFamilienname);
-        vorname = checkStringAndRequestFocus(jTextVorname);
-        zweitname = checkStringAndRequestFocus(jTextZweitname);
-
-        mdk = new MenschDatenKonkret.Builder().build();
+        if (textfeldNummer == null) {
+            textfeldNummer = 1;
+        }
+        if (textfeldNummer != 0) {
+            // vielleicht noch Dialogfenster, dass Daten einzutragen sind,
+            // ergänzen
+            textfeldNummer = checkTheInformations(textfeldNummer);
+//            System.out.println(textfeldNummer);
+        }
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
-    private String checkStringAndRequestFocus(JTextField textfeld) {
+    private void createMenschDatenKonkret() {
+        boolean everyTextFieldIsFilled = true;
+        if (checkStringAndRequestFocusIfNecessary(jTextGeburtsname).length() == 0) {
+            everyTextFieldIsFilled = false;
+            checkTheInformations((byte) 1);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jTextFamilienname).length() == 0) {
+            everyTextFieldIsFilled = false;
+            checkTheInformations((byte) 2);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jTextVorname).length() == 0) {
+            everyTextFieldIsFilled = false;
+            checkTheInformations((byte) 3);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jTextZweitname).length() == 0) {
+            everyTextFieldIsFilled = false;
+            checkTheInformations((byte) 4);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum).length() == 0) {
+            everyTextFieldIsFilled = false;
+            checkTheInformations((byte) 5);
+        }
+        if (everyTextFieldIsFilled) {
+            if (birthdayIsChecked()) {
+                mdk = new MenschDatenKonkret.Builder()
+                        .geburtsname(geburtsname)
+                        .familienname(familienname)
+                        .vorname(vorname)
+                        .zweitname(zweitname)
+                        .build();
+                System.out.println("Menschdaten: " + mdk);
+            }
+        }
+    }
+
+    private boolean birthdayIsChecked() {
+        // hier wollen wir abfragen, ob das Alter der Person realistisch ist
+        // sagen wir: es sollte zwischen 0 und 80 Jahren sein
+        // später eventuell mal konkretere Abfragen:
+        // maximales Alter Grunschüler, Lehrer, ...
+        return true;
+    }
+
+    private byte checkTheInformations(byte b) {
+        switch (b) {
+            case 1:
+                geburtsname = checkStringAndRequestFocusIfNecessary(jTextGeburtsname);
+                if (geburtsname.length() == 0) {
+                    return 1;
+                }
+//                break;
+            case 2:
+                familienname = checkStringAndRequestFocusIfNecessary(jTextFamilienname);
+                if (familienname.length() == 0) {
+                    return 2;
+                }
+//                break;
+            case 3:
+                vorname = checkStringAndRequestFocusIfNecessary(jTextVorname);
+                if (vorname.length() == 0) {
+                    return 3;
+                }
+//                break;
+            case 4:
+                zweitname = checkStringAndRequestFocusIfNecessary(jTextZweitname);
+                if (zweitname.length() == 0) {
+                    return 4;
+                }
+//                break;
+            case 5:
+                geburtsdatum = checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum);
+                if (geburtsdatum.length() == 0) {
+                    return 5;
+                }
+//                break;
+            case 6:
+                createMenschDatenKonkret();
+                break;
+            default:
+                throw new AssertionError();
+        }
+        return 0;
+    }
+
+    private String checkStringAndRequestFocusIfNecessary(JTextField textfeld) {
         String eingabeText = textfeld.getText().trim();
+        textfeld.setText(eingabeText);
         if (eingabeText.length() == 0) {
             textfeld.requestFocus();
             textfeld.selectAll();
