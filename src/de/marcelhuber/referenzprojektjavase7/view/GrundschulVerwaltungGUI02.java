@@ -1,9 +1,16 @@
 package de.marcelhuber.referenzprojektjavase7.view;
 // TODO: Die ganzen abstrakten Methoden sind zu implementieren
+//       Weiterhin: Die Abfrage mit dem Geburtstag bzw. der Test, ob alle Felder
+//       sinnvoll gefüllt sind, funktioniert noch nicht korrekt
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
+import de.marcelhuber.systemtools.Marker;
+import de.marcelhuber.systemtools.PressEnter;
+import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JTextField;
 
 /**
@@ -11,6 +18,8 @@ import javax.swing.JTextField;
  * @author Marcel Huber
  */
 public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements GrundschulVerwaltungView {
+
+    private LoginDialog loginDialog;
 
     private boolean showjPanelDirektor;
     private boolean showjPanelFixMensch;
@@ -20,17 +29,21 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private String vorname;
     private String zweitname;
     private String geburtsdatum;
+    private String heutigesDatum;
     private Byte textfeldNummer;
+    private Date date;
+    private DateFormat df;
+    private String[] aDaysInformationsAsStrings;
+    private int[] todaysInformations;
+    private int[] birthdayInformations;
 
     /**
      * Creates new form GrundschulVerwaltungGUI01
      */
     public GrundschulVerwaltungGUI02() {
         initComponents();
-        showjPanelDirektor = false;
-        setShowjPanelDirektor(showjPanelDirektor);
-        showjPanelFixMensch = false;
-        setShowjPanelFixMensch(showjPanelFixMensch);
+        setShowjPanelDirektor(false);
+        setShowjPanelFixMensch(false);
     }
 
     /**
@@ -62,6 +75,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemDirektor = new javax.swing.JMenuItem();
         jMenuItemExtern = new javax.swing.JMenuItem();
+        jMenuItemLogin = new javax.swing.JMenuItem();
         jMenuOptionales = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -121,13 +135,13 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                     .addComponent(jLabelGeburtsname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelGeburtsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addComponent(jTextZweitname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextVorname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFamilienname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextGeburtsname, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelFixMenschLayout.setVerticalGroup(
             jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,13 +198,15 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jPanelDirektorLayout.setHorizontalGroup(
             jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDirektorLayout.createSequentialGroup()
-                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonCreatePerson)
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDirektorLayout.createSequentialGroup()
                         .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(336, Short.MAX_VALUE))
+                        .addComponent(jScrollPanelDirektor))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDirektorLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCreatePerson)))
+                .addContainerGap())
         );
         jPanelDirektorLayout.setVerticalGroup(
             jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,9 +215,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxUnterrichtsfaecher)
                     .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCreatePerson)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -216,6 +232,14 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jMenuItemExtern.setText("Extern");
         jMenuUserLogin.add(jMenuItemExtern);
+
+        jMenuItemLogin.setText("Login");
+        jMenuItemLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLoginActionPerformed(evt);
+            }
+        });
+        jMenuUserLogin.add(jMenuItemLogin);
 
         jMenuBar1.add(jMenuUserLogin);
 
@@ -271,8 +295,30 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             // ergänzen
             textfeldNummer = checkTheInformations(textfeldNummer);
 //            System.out.println(textfeldNummer);
+        } else {
+            createMenschDatenKonkret();
         }
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
+
+    private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
+        if (loginDialog == null) {
+            loginDialog = new LoginDialog(this);
+        }
+
+        loginDialog.showDialog();
+
+        if (loginDialog.isLoginOK()) {
+            setShowjPanelFixMensch(true);
+            jTextGeburtsname.requestFocus();
+            setShowjPanelDirektor(true);
+            setAlljTextFieldsEnabled();
+        } else {
+            setShowjPanelFixMensch(true);
+            jTextGeburtsname.requestFocus();
+            setAlljTextFieldsDisabled();
+            setShowjPanelDirektor(false);
+        }
+    }//GEN-LAST:event_jMenuItemLoginActionPerformed
 
     private void createMenschDatenKonkret() {
         boolean everyTextFieldIsFilled = true;
@@ -303,18 +349,67 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                         .familienname(familienname)
                         .vorname(vorname)
                         .zweitname(zweitname)
+                        //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
                         .build();
                 System.out.println("Menschdaten: " + mdk);
+            } else {
+                jFormattedTextMenschGeburtsdatum.setText("");
             }
         }
     }
 
     private boolean birthdayIsChecked() {
+        boolean birthdayIsChecked = true;
         // hier wollen wir abfragen, ob das Alter der Person realistisch ist
         // sagen wir: es sollte zwischen 0 und 80 Jahren sein
         // später eventuell mal konkretere Abfragen:
         // maximales Alter Grunschüler, Lehrer, ...
-        return true;
+        int alter = -1;
+        date = new Date();
+        df = DateFormat.getDateInstance();
+        heutigesDatum = df.format(date);
+//        System.out.println(heutigesDatum);
+//        System.out.println(geburtsdatum);
+        aDaysInformationsAsStrings = heutigesDatum.split("\\.");
+        todaysInformations = new int[aDaysInformationsAsStrings.length];
+        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
+            todaysInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
+        }
+//        System.out.println(Arrays.toString(todaysInformations));
+        if (geburtsdatum.length() == 0) {
+            return birthdayIsChecked = false;
+        }
+        aDaysInformationsAsStrings = geburtsdatum.split("\\.");
+        birthdayInformations = new int[aDaysInformationsAsStrings.length];
+        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
+            birthdayInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
+        }
+        if (birthdayInformations.length != todaysInformations.length) {
+            return birthdayIsChecked = false;
+        }
+//        System.out.println(Arrays.toString(birthdayInformations));
+        int lastIndex = birthdayInformations.length - 1;
+        // lastIndex zeigt die Jahreszahlen an
+        alter = todaysInformations[lastIndex] - birthdayInformations[lastIndex];
+        lastIndex--;
+        // lastIndex zeigt jetzt die Monatszahlen an (0-basiert)
+        if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
+            --alter;
+        } else if (todaysInformations[lastIndex] == birthdayInformations[lastIndex]) {
+            lastIndex--;
+            // lastIndex zeigt nun die Tage an
+            if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
+                --alter;
+            }
+        }
+        // momentan sagen wir, dass es keine Personen über 50 an der Schule geben wird
+        if (alter < 0 || alter > 50) {
+            birthdayIsChecked = false;
+            System.err.println("Alter: " + alter);
+        } else {
+            System.out.println("Alter: " + alter);
+        }
+        return birthdayIsChecked;
     }
 
     private byte checkTheInformations(byte b) {
@@ -348,14 +443,10 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 if (geburtsdatum.length() == 0) {
                     return 5;
                 }
-//                break;
-            case 6:
-                createMenschDatenKonkret();
-                break;
             default:
-                throw new AssertionError();
+                return 0;
+//                throw new AssertionError();
         }
-        return 0;
     }
 
     private String checkStringAndRequestFocusIfNecessary(JTextField textfeld) {
@@ -417,6 +508,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemDirektor;
     private javax.swing.JMenuItem jMenuItemExtern;
+    private javax.swing.JMenuItem jMenuItemLogin;
     private javax.swing.JMenu jMenuOptionales;
     private javax.swing.JMenu jMenuUserLogin;
     private javax.swing.JPanel jPanelDirektor;
@@ -501,8 +593,25 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         this.showjPanelDirektor = showjPanelDirektor;
         jPanelDirektor.setVisible(showjPanelDirektor);
     }
+
     private void setShowjPanelFixMensch(boolean showjPanelFixMensch) {
         this.showjPanelFixMensch = showjPanelFixMensch;
         jPanelFixMensch.setVisible(showjPanelFixMensch);
+    }
+
+    private void setAlljTextFieldsDisabled() {
+        jTextFamilienname.setEnabled(false);
+        jTextGeburtsname.setEnabled(false);
+        jTextVorname.setEnabled(false);
+        jTextZweitname.setEnabled(false);
+        jFormattedTextMenschGeburtsdatum.setEnabled(false);
+    }
+
+    private void setAlljTextFieldsEnabled() {
+        jTextFamilienname.setEnabled(true);
+        jTextGeburtsname.setEnabled(true);
+        jTextVorname.setEnabled(true);
+        jTextZweitname.setEnabled(true);
+        jFormattedTextMenschGeburtsdatum.setEnabled(true);
     }
 }
