@@ -152,6 +152,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextGeburtsnameFocusGained"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextGeburtsnameActionPerformed"/>
           </Events>
         </Component>
@@ -179,6 +180,9 @@
               <Font name="Vani" size="16" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFamiliennameFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelVorname">
           <Properties>
@@ -196,6 +200,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextVornameFocusGained"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextVornameActionPerformed"/>
           </Events>
         </Component>
@@ -214,6 +219,9 @@
               <Font name="Vani" size="16" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextZweitnameFocusGained"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelGeburtsdatum">
           <Properties>
@@ -233,6 +241,9 @@
               <Font name="Vani" size="16" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jFormattedTextMenschGeburtsdatumFocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
