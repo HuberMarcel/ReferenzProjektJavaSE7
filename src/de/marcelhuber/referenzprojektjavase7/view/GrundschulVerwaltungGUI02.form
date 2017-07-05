@@ -63,7 +63,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanelDirektor" alignment="0" max="32767" attributes="0"/>
           <Component id="jPanelFixMensch" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -72,7 +72,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanelFixMensch" min="-2" pref="365" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jPanelDirektor" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -228,7 +228,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jPanelDirektor">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -239,7 +239,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jCheckBoxUnterrichtsfaecher" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneUnterrichtsfaecher" min="-2" pref="604" max="-2" attributes="0"/>
+                          <Component id="jScrollPanelDirektor" min="-2" pref="604" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="336" max="32767" attributes="0"/>
@@ -252,7 +252,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jCheckBoxUnterrichtsfaecher" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneUnterrichtsfaecher" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="jScrollPanelDirektor" min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="162" max="32767" attributes="0"/>
                   <Component id="jButtonCreatePerson" min="-2" max="-2" attributes="0"/>
@@ -262,7 +262,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPaneUnterrichtsfaecher">
+        <Container class="javax.swing.JScrollPane" name="jScrollPanelDirektor">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>

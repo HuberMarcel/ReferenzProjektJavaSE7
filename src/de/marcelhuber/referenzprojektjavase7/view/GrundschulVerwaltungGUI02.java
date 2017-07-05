@@ -12,6 +12,8 @@ import javax.swing.JTextField;
  */
 public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements GrundschulVerwaltungView {
 
+    private boolean showjPanelDirektor;
+    private boolean showjPanelFixMensch;
     private MenschDatenKonkret mdk;
     private String geburtsname;
     private String familienname;
@@ -25,6 +27,10 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
      */
     public GrundschulVerwaltungGUI02() {
         initComponents();
+        showjPanelDirektor = false;
+        setShowjPanelDirektor(showjPanelDirektor);
+        showjPanelFixMensch = false;
+        setShowjPanelFixMensch(showjPanelFixMensch);
     }
 
     /**
@@ -47,8 +53,8 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jTextZweitname = new javax.swing.JTextField();
         jLabelGeburtsdatum = new javax.swing.JLabel();
         jFormattedTextMenschGeburtsdatum = new javax.swing.JFormattedTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPaneUnterrichtsfaecher = new javax.swing.JScrollPane();
+        jPanelDirektor = new javax.swing.JPanel();
+        jScrollPanelDirektor = new javax.swing.JScrollPane();
         jListUnterrichtsfaecher = new javax.swing.JList();
         jCheckBoxUnterrichtsfaecher = new javax.swing.JCheckBox();
         jButtonCreatePerson = new javax.swing.JButton();
@@ -155,7 +161,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPaneUnterrichtsfaecher.setViewportView(jListUnterrichtsfaecher);
+        jScrollPanelDirektor.setViewportView(jListUnterrichtsfaecher);
 
         jCheckBoxUnterrichtsfaecher.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jCheckBoxUnterrichtsfaecher.setText("Unterrichtsfächer");
@@ -173,26 +179,26 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        javax.swing.GroupLayout jPanelDirektorLayout = new javax.swing.GroupLayout(jPanelDirektor);
+        jPanelDirektor.setLayout(jPanelDirektorLayout);
+        jPanelDirektorLayout.setHorizontalGroup(
+            jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonCreatePerson)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelDirektorLayout.createSequentialGroup()
                         .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(336, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelDirektorLayout.setVerticalGroup(
+            jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDirektorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxUnterrichtsfaecher)
-                    .addComponent(jScrollPaneUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jButtonCreatePerson)
                 .addContainerGap())
@@ -226,7 +232,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelFixMensch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -234,7 +240,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelFixMensch, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,37 +371,37 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GrundschulVerwaltungGUI02().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(GrundschulVerwaltungGUI01.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GrundschulVerwaltungGUI02().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreatePerson;
@@ -413,9 +419,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private javax.swing.JMenuItem jMenuItemExtern;
     private javax.swing.JMenu jMenuOptionales;
     private javax.swing.JMenu jMenuUserLogin;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelDirektor;
     private javax.swing.JPanel jPanelFixMensch;
-    private javax.swing.JScrollPane jScrollPaneUnterrichtsfaecher;
+    private javax.swing.JScrollPane jScrollPanelDirektor;
     private javax.swing.JTextField jTextFamilienname;
     private javax.swing.JTextField jTextGeburtsname;
     private javax.swing.JTextField jTextVorname;
@@ -489,5 +495,14 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     @Override
     public Calendar getGeburtsdatum() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void setShowjPanelDirektor(boolean showjPanelDirektor) {
+        this.showjPanelDirektor = showjPanelDirektor;
+        jPanelDirektor.setVisible(showjPanelDirektor);
+    }
+    private void setShowjPanelFixMensch(boolean showjPanelFixMensch) {
+        this.showjPanelFixMensch = showjPanelFixMensch;
+        jPanelFixMensch.setVisible(showjPanelFixMensch);
     }
 }
