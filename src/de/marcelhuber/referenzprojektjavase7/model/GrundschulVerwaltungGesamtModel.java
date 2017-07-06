@@ -54,4 +54,9 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     public void setAdressDaten(AdressDaten adressDaten) {
         this.adressDaten = adressDaten;
     }
+
+    public void benachrichtige() {
+        setChanged();
+        notifyObservers(menschDatenKonkret);
+    }
 }

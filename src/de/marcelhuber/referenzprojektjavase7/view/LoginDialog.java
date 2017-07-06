@@ -104,6 +104,7 @@ public class LoginDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCancleActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancleActionPerformed
+        loginOK = false;
         dispose();
     }//GEN-LAST:event_buttonCancleActionPerformed
 
@@ -127,11 +128,10 @@ public class LoginDialog extends javax.swing.JDialog {
         textPassword.setText("");
         setVisible(true);
     }
-    
+
     public boolean isLoginOK() {
         return loginOK;
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
