@@ -385,7 +385,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private void createMenschDatenKonkret() {
 //        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
         checkTheInformations((byte) 1);
-        // die obige Funktion kann sorgt immer dafür, dass, falls Felder geänder
+        // die obige Funktion kann sorgt immer dafür, dass, falls Felder geändert
         // wurden, der neue Eintrag in die MenschDatenKonkret übernommen wird
         // ihr eigentlicher ursprünglicher Sinn war es, leere Felder zu 
         // lokalisieren und zu markieren
