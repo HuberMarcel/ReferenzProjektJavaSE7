@@ -4,20 +4,21 @@ package de.marcelhuber.referenzprojektjavase7.view;
  *
  * @author Marcel Huber
  */
-public enum EnumLoginPersonen {
+public enum EnumUserRole {
 
     DIREKTOR("Direktor"),
     KONTAKTPERSON("Kontaktperson"),
-    EXTERN("Extern"),;
+    EXTERN("Extern"),
+    NONE("");
     private boolean loginOK;
-    private String loginTyp;
+    private String userRole;
 
-    private EnumLoginPersonen(String loginTyp) {
-        this.loginTyp = loginTyp;
+    private EnumUserRole(String loginTyp) {
+        this.userRole = loginTyp;
     }
 
     public String getLoginTyp() {
-        return loginTyp;
+        return userRole;
     }
 
     public boolean isLoginOK() {

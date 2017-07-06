@@ -345,17 +345,32 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         loginDialog.showDialog();
 
-        if (loginDialog.isLoginOK()) {
-            setShowjPanelFixMensch(true);
-            jTextGeburtsname.requestFocus();
-            setShowjPanelDirektor(true);
-            setAlljTextFieldsEnabled();
-        } else {
-            setShowjPanelFixMensch(true);
-            jTextGeburtsname.requestFocus();
-            setAlljTextFieldsDisabled();
-            setShowjPanelDirektor(false);
+        resetUserRole();
+        switch (loginDialog.getUserRole()) {
+            case DIREKTOR:
+                setUserRoleDirektor();
+                break;
+            case KONTAKTPERSON:
+                setUserRoleKontaktperson();
+                break;
+            case EXTERN:
+            case NONE:
+                break;
+            default:
+                throw new AssertionError();
         }
+
+//        if (loginDialog.isLoginOK()) {
+//            setShowjPanelFixMensch(true);
+//            jTextGeburtsname.requestFocus();
+//            setShowjPanelDirektor(true);
+//            setAlljTextFieldsEnabled();
+//        } else {
+//            setShowjPanelFixMensch(true);
+//            jTextGeburtsname.requestFocus();
+//            setAlljTextFieldsDisabled();
+//            setShowjPanelDirektor(false);
+//        }
     }//GEN-LAST:event_jMenuItemLoginActionPerformed
 
     private void jTextGeburtsnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextGeburtsnameFocusGained
@@ -726,5 +741,33 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     public MenschDatenKonkret getMdk() {
         return mdk;
+    }
+
+    private void setUserRoleDirektor() {
+        setUserRoleKontaktperson();
+        setShowjPanelDirektor(true);
+        setAlljTextFieldsEnabled();
+    }
+
+    private void setUserRoleKontaktperson() {
+        setShowjPanelFixMensch(true);
+        jTextGeburtsname.requestFocus();
+    }
+
+    private void resetUserRole() {
+        setShowjPanelDirektor(false);
+        setShowjPanelFixMensch(false);
+        setAlljTextFieldsDisabled();
+    }
+
+    @Override
+    public MenschDatenKonkret getMenschDatenKonkret() {
+        return mdk;
+    }
+
+    @Override
+    public boolean setMenschDatenKonkret(MenschDatenKonkret mdk) {
+        // TODO
+        return false;
     }
 }

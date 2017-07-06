@@ -1,6 +1,7 @@
 package de.marcelhuber.referenzprojektjavase7.view;
 
 import de.marcelhuber.referenzprojektjavase7.controller.*;
+import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import java.util.*;
 
 /**
@@ -25,5 +26,8 @@ public interface GrundschulVerwaltungView {
     boolean setZweitname(String zweitname);
     // geburtsdatum
     Calendar getGeburtsdatum();                               
-    boolean setGeburtsdatum(Calendar geburtsdatum);                               
+    boolean setGeburtsdatum(Calendar geburtsdatum);        
+    // MenschDatenKonkret
+    MenschDatenKonkret getMenschDatenKonkret();
+    boolean setMenschDatenKonkret(MenschDatenKonkret mdk);
 }

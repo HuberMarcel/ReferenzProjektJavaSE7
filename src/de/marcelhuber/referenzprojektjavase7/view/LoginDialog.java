@@ -9,7 +9,7 @@ import javax.swing.*;
  */
 public class LoginDialog extends javax.swing.JDialog {
 
-    private boolean loginOK;
+    private EnumUserRole userRole;
 
     public LoginDialog(java.awt.Frame parent) {
         super(parent, true);
@@ -104,14 +104,21 @@ public class LoginDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCancleActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancleActionPerformed
-        loginOK = false;
         dispose();
     }//GEN-LAST:event_buttonCancleActionPerformed
 
     private void buttonOKActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         dispose();
         // prüfe ob Username / Password korrekt
-        loginOK = true;
+        if (textUsername.getText().equalsIgnoreCase("Marcel")) {
+            userRole = EnumUserRole.DIREKTOR;
+        } 
+        if (textUsername.getText().equalsIgnoreCase("Stefan")) {
+           userRole = EnumUserRole.KONTAKTPERSON;
+        }
+        if (textUsername.getText().equalsIgnoreCase("Peter")) {
+           userRole = EnumUserRole.EXTERN;
+        }
     }//GEN-LAST:event_buttonOKActionPerformed
 
     private void checkPasswordVisibleActionPerformed(ActionEvent evt) {//GEN-FIRST:event_checkPasswordVisibleActionPerformed
@@ -123,14 +130,10 @@ public class LoginDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_checkPasswordVisibleActionPerformed
 
     public void showDialog() {
-        loginOK = false;
+        userRole = EnumUserRole.NONE;
         textUsername.setText("");
         textPassword.setText("");
         setVisible(true);
-    }
-
-    public boolean isLoginOK() {
-        return loginOK;
     }
 
 
@@ -143,4 +146,8 @@ public class LoginDialog extends javax.swing.JDialog {
     private JPasswordField textPassword;
     private JTextField textUsername;
     // End of variables declaration//GEN-END:variables
+
+    public EnumUserRole getUserRole() {
+        return userRole;
+    }
 }

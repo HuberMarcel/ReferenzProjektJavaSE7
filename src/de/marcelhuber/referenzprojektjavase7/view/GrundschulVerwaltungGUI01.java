@@ -2,6 +2,7 @@ package de.marcelhuber.referenzprojektjavase7.view;
 // TODO: Die ganzen abstrakten Methoden sind zu implementieren
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
+import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import java.util.Calendar;
 
 /**
@@ -515,5 +516,17 @@ public class GrundschulVerwaltungGUI01 extends javax.swing.JFrame implements Gru
     @Override
     public Calendar getGeburtsdatum() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public MenschDatenKonkret getMenschDatenKonkret() {
+        // TODO
+        return new MenschDatenKonkret.Builder().build();
+    }
+
+    @Override
+    public boolean setMenschDatenKonkret(MenschDatenKonkret mdk) {
+        // TODO
+        return false;
     }
 }
