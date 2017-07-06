@@ -24,7 +24,7 @@ public class GrundschulVerwaltungStartMVC {
         gsVmodel = new GrundschulVerwaltungGesamtModel();
         gsVView = getView();
         gsVController = new GrundschulVerwaltungController(gsVmodel, gsVView);
-
+//
         gsVController.showView();
     }
 
