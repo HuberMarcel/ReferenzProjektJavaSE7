@@ -17,9 +17,9 @@ public class GrundschulVerwaltungController implements Observer {
     public GrundschulVerwaltungController(GrundschulVerwaltungGesamtModel gsVgModel,
             GrundschulVerwaltungView gsVView) {
         this.gsVgModel = gsVgModel;
-        gsVgModel.addObserver(this);
         this.gsVView = gsVView;
         gsVView.setController(this);
+        gsVgModel.addObserver(this);
     }
 
     // Bei anzeigewürdigen neuen Daten --> Model entscheidet
