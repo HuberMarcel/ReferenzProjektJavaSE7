@@ -426,7 +426,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 //                        //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
 //                        .build();
 //                System.out.println("Menschdaten: " + mdk);
-                createMenschDatenKonret();
+                informControllerToCreateNewMenschDatenKonkret();
             } else {
 //                jFormattedTextMenschGeburtsdatum.setText("");
                 // hier sollte vielleicht besser ein Dialogfeld erscheinen,
@@ -711,7 +711,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         alljTextFields.add(jFormattedTextMenschGeburtsdatum);
     }
 
-    private void createMenschDatenKonret() {
+    private void informControllerToCreateNewMenschDatenKonkret() {
+        // an dieser Stelle soll eigentlich der Controller die Information
+        // erhalten, dass er neue MenschDatenKonret anlegen kann
         mdk = new MenschDatenKonkret.Builder()
                 .geburtsname(geburtsname)
                 .familienname(familienname)
