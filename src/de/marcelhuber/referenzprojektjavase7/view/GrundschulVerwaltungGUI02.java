@@ -333,7 +333,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             textfeldNummer = checkTheInformations(textfeldNummer);
         }
         if (textfeldNummer == 0) {
-            createMenschDatenKonkret();
+            kontrolliereDieDatenDerGui();
         }
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
@@ -382,7 +382,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     // anderer Methodenname
     // besser: diese Aufgabe dem Controller übergeben, eigentlich darf die 
     //         GUI keine Geschätslogik enthalten
-    private void createMenschDatenKonkret() {
+    private void kontrolliereDieDatenDerGui() {
 //        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
         checkTheInformations((byte) 1);
         // die obige Funktion kann sorgt immer dafür, dass, falls Felder geändert
@@ -417,14 +417,16 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 // kein Objekt erzeugen, sondern Controller informieren
                 // Controller holt die Daten ab, und erzeugt das entsprechende DAO
                 // der Rest wird vom DAO erledigt
-                mdk = new MenschDatenKonkret.Builder()
-                        .geburtsname(geburtsname)
-                        .familienname(familienname)
-                        .vorname(vorname)
-                        .zweitname(zweitname)
-                        //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
-                        .build();
-                System.out.println("Menschdaten: " + mdk);
+////                alter Code
+//                mdk = new MenschDatenKonkret.Builder()
+//                        .geburtsname(geburtsname)
+//                        .familienname(familienname)
+//                        .vorname(vorname)
+//                        .zweitname(zweitname)
+//                        //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
+//                        .build();
+//                System.out.println("Menschdaten: " + mdk);
+                createMenschDatenKonret();
             } else {
 //                jFormattedTextMenschGeburtsdatum.setText("");
                 // hier sollte vielleicht besser ein Dialogfeld erscheinen,
@@ -707,5 +709,20 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         alljTextFields.add(jTextVorname);
         alljTextFields.add(jTextZweitname);
         alljTextFields.add(jFormattedTextMenschGeburtsdatum);
+    }
+
+    private void createMenschDatenKonret() {
+        mdk = new MenschDatenKonkret.Builder()
+                .geburtsname(geburtsname)
+                .familienname(familienname)
+                .vorname(vorname)
+                .zweitname(zweitname)
+                //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
+                .build();
+        System.out.println("Menschdaten: " + mdk);
+    }
+
+    public MenschDatenKonkret getMdk() {
+        return mdk;
     }
 }

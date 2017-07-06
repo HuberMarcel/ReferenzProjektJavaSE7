@@ -24,7 +24,8 @@ public class GrundschulVerwaltungController implements Observer {
 
     // Bei anzeigewürdigen neuen Daten --> Model entscheidet
     public void update(Observable o, Object arg) {
-        // TODO
+    
+    // TODO
     }
 
     public void showView() {
