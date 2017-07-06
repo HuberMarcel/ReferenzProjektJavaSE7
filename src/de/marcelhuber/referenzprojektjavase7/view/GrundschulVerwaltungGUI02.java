@@ -378,6 +378,10 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jFormattedTextMenschGeburtsdatum.selectAll();
     }//GEN-LAST:event_jFormattedTextMenschGeburtsdatumFocusGained
 
+    // eigentlich sollte die GUI nur kontrollieren, ob die Einträge OK
+    // anderer Methodenname
+    // besser: diese Aufgabe dem Controller übergeben, eigentlich darf die 
+    //         GUI keine Geschätslogik enthalten
     private void createMenschDatenKonkret() {
 //        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
         checkTheInformations((byte) 1);
@@ -410,6 +414,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         if (everyTextFieldIsFilled) {
 //            System.out.println(birthdayIsChecked());
             if (birthdayIsChecked()) {
+                // kein Objekt erzeugen, sondern Controller informieren
+                // Controller die Daten ab, und erzeugt das entsprechende DAO
+                // der Rest wird vom DAO erledigt
                 mdk = new MenschDatenKonkret.Builder()
                         .geburtsname(geburtsname)
                         .familienname(familienname)
