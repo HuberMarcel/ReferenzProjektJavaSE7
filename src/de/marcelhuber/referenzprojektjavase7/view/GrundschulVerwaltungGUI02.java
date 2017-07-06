@@ -415,7 +415,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 //            System.out.println(birthdayIsChecked());
             if (birthdayIsChecked()) {
                 // kein Objekt erzeugen, sondern Controller informieren
-                // Controller die Daten ab, und erzeugt das entsprechende DAO
+                // Controller holt die Daten ab, und erzeugt das entsprechende DAO
                 // der Rest wird vom DAO erledigt
                 mdk = new MenschDatenKonkret.Builder()
                         .geburtsname(geburtsname)
