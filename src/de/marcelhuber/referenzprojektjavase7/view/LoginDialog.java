@@ -113,10 +113,10 @@ public class LoginDialog extends javax.swing.JDialog {
         if (textUsername.getText().equalsIgnoreCase("Marcel")) {
             userRole = EnumUserRole.DIREKTOR;
         } 
-        if (textUsername.getText().equalsIgnoreCase("Stefan")) {
+        if (textUsername.getText().equalsIgnoreCase("Isabell")) {
            userRole = EnumUserRole.KONTAKTPERSON;
         }
-        if (textUsername.getText().equalsIgnoreCase("Peter")) {
+        if (textUsername.getText().equalsIgnoreCase("Stefan")) {
            userRole = EnumUserRole.EXTERN;
         }
     }//GEN-LAST:event_buttonOKActionPerformed

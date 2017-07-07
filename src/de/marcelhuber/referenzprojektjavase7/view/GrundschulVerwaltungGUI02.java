@@ -36,15 +36,14 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private int[] todaysInformations;
     private int[] birthdayInformations;
     private Integer alter;
-    private int minimalAlter;
-    private int maximalAlter;
+//    private int minimalAlter;
+//    private int maximalAlter;
     private List<JTextField> alljTextFields;
 
-    {
-        minimalAlter = 0;
-        maximalAlter = 79;
-    }
-
+//    {
+//        minimalAlter = 0;
+//        maximalAlter = 79;
+//    }
     /**
      * Creates new form GrundschulVerwaltungGUI01
      */
@@ -428,91 +427,91 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 //        Marker.marker();
         if (everyTextFieldIsFilled) {
 //            System.out.println(birthdayIsChecked());
-            if (birthdayIsChecked()) {
-                // kein Objekt erzeugen, sondern Controller informieren
-                // Controller holt die Daten ab, und erzeugt das entsprechende DAO
-                // der Rest wird vom DAO erledigt
-////                alter Code
-//                mdk = new MenschDatenKonkret.Builder()
-//                        .geburtsname(geburtsname)
-//                        .familienname(familienname)
-//                        .vorname(vorname)
-//                        .zweitname(zweitname)
-//                        //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
-//                        .build();
-//                System.out.println("Menschdaten: " + mdk);
-                informControllerToCreateNewMenschDatenKonkret();
-            } else {
-//                jFormattedTextMenschGeburtsdatum.setText("");
-                // hier sollte vielleicht besser ein Dialogfeld erscheinen,
-                // wo angezeigt wird, dass der Geburtstag sicher unsinnig ist
-                jFormattedTextMenschGeburtsdatum.requestFocus();
-//                jFormattedTextMenschGeburtsdatum.selectAll();
-            }
-        }
-    }
-
-    private boolean birthdayIsChecked() {
-        boolean birthdayIsChecked = true;
-        // die Methode wird insbesondere aufgerufen, nachdem das Textfeld
-        // jFormattedTextMenschGeburtsdatum einen neuen Eintrag hat
-        // danach muss geburtsdatum aktualisiert werden - das geschieht in der
-        // direkt folgenden Zeile!!
-        geburtsdatum = jFormattedTextMenschGeburtsdatum.getText();
-        // hier wollen wir abfragen, ob das Alter der Person realistisch ist
-        // sagen wir: es sollte zwischen 0 und 80 Jahren sein
-        // später eventuell mal konkretere Abfragen:
-        // maximales Alter Grunschüler, Lehrer, ...
-        date = new Date();
-        df = DateFormat.getDateInstance();
-        heutigesDatum = df.format(date);
-//        System.out.println(heutigesDatum);
-//        System.out.println(geburtsdatum);
-        aDaysInformationsAsStrings = heutigesDatum.split("\\.");
-        todaysInformations = new int[aDaysInformationsAsStrings.length];
-        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
-            todaysInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
-        }
-//        System.out.println(Arrays.toString(todaysInformations));
-        if (geburtsdatum.length() == 0) {
-            return birthdayIsChecked = false;
-        }
-        aDaysInformationsAsStrings = geburtsdatum.split("\\.");
-        birthdayInformations = new int[aDaysInformationsAsStrings.length];
-        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
-            birthdayInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
-        }
-        if (birthdayInformations.length != todaysInformations.length) {
-            return birthdayIsChecked = false;
-        }
-//        System.out.println(Arrays.toString(birthdayInformations));
-        int lastIndex = birthdayInformations.length - 1;
-        // lastIndex zeigt die Jahreszahlen an
-        alter = todaysInformations[lastIndex] - birthdayInformations[lastIndex];
-        lastIndex--;
-        // lastIndex zeigt jetzt die Monatszahlen an (0-basiert)
-        if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
-            --alter;
-        } else if (todaysInformations[lastIndex] == birthdayInformations[lastIndex]) {
-            lastIndex--;
-            // lastIndex zeigt nun die Tage an
-            if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
-                --alter;
-            }
-        }
-        // momentan sagen wir, dass es keine Personen über 50 an der Schule geben wird
-        if (alter < minimalAlter || alter > maximalAlter) {
-            birthdayIsChecked = false;
-            System.err.println("Alter: " + alter);
+//            if (birthdayIsChecked()) {
+            // kein Objekt erzeugen, sondern Controller informieren
+            // Controller holt die Daten ab, und erzeugt das entsprechende DAO
+            // der Rest wird vom DAO erledigt
+//                alter Code
+            mdk = new MenschDatenKonkret.Builder()
+                    .geburtsname(geburtsname)
+                    .familienname(familienname)
+                    .vorname(vorname)
+                    .zweitname(zweitname)
+                    //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
+                    .build();
+//                System.out.println("Menschdaten (in GUI02): " + mdk);
+            System.out.println("GUI02 - Geburtsdatum: " + geburtsdatum);
+            gsVController.getMenschDatenKonkret();
         } else {
-//            birthdayIsChecked = true;
-            System.out.println("Alter: " + alter);
+//                jFormattedTextMenschGeburtsdatum.setText("");
+            // hier sollte vielleicht besser ein Dialogfeld erscheinen,
+            // wo angezeigt wird, dass der Geburtstag sicher unsinnig ist
+            jFormattedTextMenschGeburtsdatum.requestFocus();
+//                jFormattedTextMenschGeburtsdatum.selectAll();
+//            }
         }
-//        System.out.println("birthdayIsChecked: " + birthdayIsChecked);
-//        System.out.println("Alter: " + alter);
-        return birthdayIsChecked;
     }
 
+//    private boolean birthdayIsChecked() {
+//        boolean birthdayIsChecked = true;
+//        // die Methode wird insbesondere aufgerufen, nachdem das Textfeld
+//        // jFormattedTextMenschGeburtsdatum einen neuen Eintrag hat
+//        // danach muss geburtsdatum aktualisiert werden - das geschieht in der
+//        // direkt folgenden Zeile!!
+//        geburtsdatum = jFormattedTextMenschGeburtsdatum.getText();
+//        // hier wollen wir abfragen, ob das Alter der Person realistisch ist
+//        // sagen wir: es sollte zwischen 0 und 80 Jahren sein
+//        // später eventuell mal konkretere Abfragen:
+//        // maximales Alter Grunschüler, Lehrer, ...
+//        date = new Date();
+//        df = DateFormat.getDateInstance();
+//        heutigesDatum = df.format(date);
+////        System.out.println(heutigesDatum);
+////        System.out.println(geburtsdatum);
+//        aDaysInformationsAsStrings = heutigesDatum.split("\\.");
+//        todaysInformations = new int[aDaysInformationsAsStrings.length];
+//        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
+//            todaysInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
+//        }
+////        System.out.println(Arrays.toString(todaysInformations));
+//        if (geburtsdatum.length() == 0) {
+//            return birthdayIsChecked = false;
+//        }
+//        aDaysInformationsAsStrings = geburtsdatum.split("\\.");
+//        birthdayInformations = new int[aDaysInformationsAsStrings.length];
+//        for (int k = 0; k < aDaysInformationsAsStrings.length; k++) {
+//            birthdayInformations[k] = Integer.parseInt(aDaysInformationsAsStrings[k]);
+//        }
+//        if (birthdayInformations.length != todaysInformations.length) {
+//            return birthdayIsChecked = false;
+//        }
+////        System.out.println(Arrays.toString(birthdayInformations));
+//        int lastIndex = birthdayInformations.length - 1;
+//        // lastIndex zeigt die Jahreszahlen an
+//        alter = todaysInformations[lastIndex] - birthdayInformations[lastIndex];
+//        lastIndex--;
+//        // lastIndex zeigt jetzt die Monatszahlen an (0-basiert)
+//        if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
+//            --alter;
+//        } else if (todaysInformations[lastIndex] == birthdayInformations[lastIndex]) {
+//            lastIndex--;
+//            // lastIndex zeigt nun die Tage an
+//            if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
+//                --alter;
+//            }
+//        }
+//        // momentan sagen wir, dass es keine Personen über 50 an der Schule geben wird
+//        if (alter < minimalAlter || alter > maximalAlter) {
+//            birthdayIsChecked = false;
+//            System.err.println("Alter: " + alter);
+//        } else {
+////            birthdayIsChecked = true;
+//            System.out.println("Alter: " + alter);
+//        }
+////        System.out.println("birthdayIsChecked: " + birthdayIsChecked);
+////        System.out.println("Alter: " + alter);
+//        return birthdayIsChecked;
+//    }
     private byte checkTheInformations(byte b) {
         switch (b) {
             case 1:
@@ -624,6 +623,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     private GrundschulVerwaltungController gsVController;
 
+    @Override
     public boolean setGeburtsdatum(Calendar geburtsdatum) {
         boolean geburtsdatumIsAccepted = false;
         // TODO: Genaue Implementierung
@@ -688,7 +688,13 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public Calendar getGeburtsdatum() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Calendar tagDerGeburt = Calendar.getInstance();
+        String[] geburtstagsArray = geburtsdatum.split("\\.");
+//        System.out.println(Arrays.toString(geburtstagsArray));
+        tagDerGeburt.set(Integer.parseInt(geburtstagsArray[2]),
+                -1+Integer.parseInt(geburtstagsArray[1]),     // Monate sind 0-basiert
+                Integer.parseInt(geburtstagsArray[0]));
+        return tagDerGeburt;
     }
 
     private void setShowjPanelDirektor(boolean showjPanelDirektor) {
@@ -724,20 +730,6 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         alljTextFields.add(jTextVorname);
         alljTextFields.add(jTextZweitname);
         alljTextFields.add(jFormattedTextMenschGeburtsdatum);
-    }
-
-    private void informControllerToCreateNewMenschDatenKonkret() {
-        // an dieser Stelle soll eigentlich der Controller die Information
-        // erhalten, dass er neue MenschDatenKonret anlegen kann
-        mdk = new MenschDatenKonkret.Builder()
-                .geburtsname(geburtsname)
-                .familienname(familienname)
-                .vorname(vorname)
-                .zweitname(zweitname)
-                //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
-                .build();
-        gsVController.getMenschDatenKonkret();
-        System.out.println("Menschdaten: " + mdk);
     }
 
     private void setUserRoleDirektor() {
