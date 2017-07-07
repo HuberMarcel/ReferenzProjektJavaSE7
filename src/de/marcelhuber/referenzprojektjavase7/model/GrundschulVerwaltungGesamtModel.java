@@ -1,5 +1,6 @@
 package de.marcelhuber.referenzprojektjavase7.model;
 
+import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.*;
 import java.util.*;
 
@@ -14,6 +15,7 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     private GrundschulLehrer grundschulLehrer;
     private GrundschulLehrerDaten grundschulLehrerDaten;
     private AdressDaten adressDaten;
+    private MySQLMenschRealDatenDao menschRealDatenDao;
 
     public MenschReal getMenschReal() {
         return menschReal;
@@ -55,8 +57,16 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
         this.adressDaten = adressDaten;
     }
 
-    public void benachrichtige() {
+    public void saveMenschDatenKonkret(MenschDatenKonkret mdk){
+        // Speichern der MenschDaten in die Datenbank über das DAO
+        // falls Speichern fehlschlägt (bspw. Verbindungsabbruch unerwartet)
+        // --> menschDatenKonkret = null setzen, sonst menschDatenKonkret = mdk
+        benachrichtige();
+    }
+    
+    private void benachrichtige() {
         setChanged();
         notifyObservers(menschDatenKonkret);
+        // wenn speichern fehlschlägt --> menschDatenKonkret = null
     }
 }

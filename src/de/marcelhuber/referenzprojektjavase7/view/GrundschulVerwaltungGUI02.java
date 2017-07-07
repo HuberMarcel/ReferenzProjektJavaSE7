@@ -736,11 +736,8 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 .zweitname(zweitname)
                 //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
                 .build();
+        gsVController.getMenschDatenKonkret();
         System.out.println("Menschdaten: " + mdk);
-    }
-
-    public MenschDatenKonkret getMdk() {
-        return mdk;
     }
 
     private void setUserRoleDirektor() {

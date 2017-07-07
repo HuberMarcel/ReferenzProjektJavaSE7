@@ -27,6 +27,7 @@ public interface GrundschulVerwaltungView {
     // geburtsdatum
     Calendar getGeburtsdatum();                               
     boolean setGeburtsdatum(Calendar geburtsdatum);        
+    // eigentlich wieder rausnehmen --> Controller erzeugt DatensatzObjekt
     // MenschDatenKonkret
     MenschDatenKonkret getMenschDatenKonkret();
     boolean setMenschDatenKonkret(MenschDatenKonkret mdk);
