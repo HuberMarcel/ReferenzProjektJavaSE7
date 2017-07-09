@@ -32,29 +32,44 @@ public class GrundschulVerwaltungController implements Observer {
         // TODO
     }
 
+    public boolean checkTheBirthdayInformations() {
+        return gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum());
+    }
+
+    public Integer getAlterFromModell() {
+        return gsVgModel.getAlter();
+    }
+
     public void getMenschDatenKonkret() {
         // Controller erzeugt Menschobjekt (MenschDaten) 
         // Controller ruft das Modell auf, und gibt Befehl zum Speichern
         // Modell prüft inhaltliche Korrektheit, nicht View
         // 
-        MenschDatenKonkret mdkFromView = gsVView.getMenschDatenKonkret();
-        System.out.println("Controller: Ich lasse mal das Modell checken, ob "
-                + "das Geburtsdatum sinnig (>= minimalAlter und <= maximalAlter) ist):");
-        System.out.println("Controller: Habe folgende Menschdaten abgeholt: " + mdkFromView);
-//        System.out.println("Controller Geburtsdatum: " + gsVView.getGeburtsdatum());
-        System.out.println("Das Model checkt, ob das Geburtsdatum sinnig ist "
-                + "(d.h., ob das Alter im Bereich [minimalAlter, maximalAlter]\n"
-                + "(die zugehörigen Werte findet man im Model)) ist. "
-                + "Analyse-Ergebnis: ");
-        if (!gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum())) {
-            System.out.println(gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum()));
-        } else {
-            System.out.println(gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum()));
-            // jetzt haben können wir das Model beauftragen, das DAO zu erzeugen und die 
-            // Daten in der Datenbank abzulegen
-        }
+////        Die folgenden Zeilen sind wegen Umstrukturierung auskommentiert
+//        MenschDatenKonkret mdkFromView = gsVView.getMenschDatenKonkret();
+//        System.out.println("Controller: Ich lasse mal das Modell checken, ob "
+//                + "das Geburtsdatum sinnig (>= minimalAlter und <= maximalAlter) ist):");
+//        System.out.println("Controller: Habe folgende Menschdaten abgeholt: " + mdkFromView);
+////        System.out.println("Controller Geburtsdatum: " + gsVView.getGeburtsdatum());
+//        System.out.println("Das Model checkt, ob das Geburtsdatum sinnig ist "
+//                + "(d.h., ob das Alter im Bereich [minimalAlter, maximalAlter]\n"
+//                + "(die zugehörigen Werte findet man im Model)) ist. "
+//                + "Analyse-Ergebnis: ");
+////        if (!checkTheBirthdayInformations()) {
+//        System.out.println(gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum()));
+//        } else {
+//            System.out.println(gsVgModel.birthdayIsChecked(gsVView.getGeburtsdatum()));
+//            // jetzt haben können wir das Model beauftragen, das DAO zu erzeugen und die 
+//            // Daten in der Datenbank abzulegen
+//        }
 
 //        gsVgModel.saveMenschDatenKonkret(gsVView.getMenschDatenKonkret());
+        MenschDatenKonkret mdk;
+        mdk = gsVView.getMenschDatenKonkret();
+        System.out.println("Controller (getMenschDatenKonkret) - fixe Daten:");
+        System.out.println(mdk);
+        System.out.println("Controller (getMenschDatenKonkret) - Alter:\n"
+                + getAlterFromModell());
     }
 
     public void showView() {

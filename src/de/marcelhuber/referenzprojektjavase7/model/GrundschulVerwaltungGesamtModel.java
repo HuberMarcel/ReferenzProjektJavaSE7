@@ -20,6 +20,7 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     private MySQLMenschRealDatenDao menschRealDatenDao;
     private int minimalAlter;
     private int maximalAlter;
+    private Integer alter;
 
     {
         minimalAlter = 0;
@@ -81,10 +82,10 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
 
     public boolean birthdayIsChecked(Calendar geburtsdatum) {
         boolean birthdayIsChecked = true;
-        MenschDatenKonkret mdkDummy = new MenschDatenKonkret("mdkDummyGeburtsname", "mdkDummyFamilienname",
-                "mdkDummyVorname", geburtsdatum);
+        MenschDatenKonkret mdkDummy = new MenschDatenKonkret("mdkDummyGeburtsname",
+                "mdkDummyFamilienname", "mdkDummyVorname", geburtsdatum);
 //        PressEnter.toContinue();
-        System.out.println(mdkDummy);
+//        System.out.println(mdkDummy);
         String geburtsdatumString = mdkDummy.getGeburtsDatumAsString();
         System.out.println("birthdayIsChecked in GrundschulVerwaltungGesamtModel, "
                 + "Geburtsdatum als String : "
@@ -123,7 +124,7 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
 //        System.out.println(Arrays.toString(birthdayInformations));
         int lastIndex = birthdayInformations.length - 1;
         // lastIndex zeigt die Jahreszahlen an
-        int alter = todaysInformations[lastIndex] - birthdayInformations[lastIndex];
+        alter = todaysInformations[lastIndex] - birthdayInformations[lastIndex];
         lastIndex--;
         // lastIndex zeigt jetzt die Monatszahlen an (0-basiert)
         if (todaysInformations[lastIndex] < birthdayInformations[lastIndex]) {
@@ -146,5 +147,9 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
 //        System.out.println("birthdayIsChecked: " + birthdayIsChecked);
 //        System.out.println("Alter: " + alter);
         return birthdayIsChecked;
+    }
+
+    public int getAlter() {
+        return alter;
     }
 }

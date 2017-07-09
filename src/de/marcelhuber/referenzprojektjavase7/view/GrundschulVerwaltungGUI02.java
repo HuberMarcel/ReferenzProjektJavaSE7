@@ -5,11 +5,13 @@ package de.marcelhuber.referenzprojektjavase7.view;
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
+import de.marcelhuber.systemtools.Marker;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -50,7 +52,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     public GrundschulVerwaltungGUI02() {
         initComponents();
         alljTextFields = new ArrayList<>();
-        fillAlljTextFields();
+        addEveryjTextField();
         setShowjPanelDirektor(false);
         setShowjPanelFixMensch(false);
     }
@@ -64,6 +66,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogGeburtstagUnsinnig = new javax.swing.JDialog();
         jPanelFixMensch = new javax.swing.JPanel();
         jTextGeburtsname = new javax.swing.JTextField();
         jLabelGeburtsname = new javax.swing.JLabel();
@@ -88,6 +91,17 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jMenuOptionales = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
+        javax.swing.GroupLayout jDialogGeburtstagUnsinnigLayout = new javax.swing.GroupLayout(jDialogGeburtstagUnsinnig.getContentPane());
+        jDialogGeburtstagUnsinnig.getContentPane().setLayout(jDialogGeburtstagUnsinnigLayout);
+        jDialogGeburtstagUnsinnigLayout.setHorizontalGroup(
+            jDialogGeburtstagUnsinnigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialogGeburtstagUnsinnigLayout.setVerticalGroup(
+            jDialogGeburtstagUnsinnigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grundschulverwaltungs-Software");
 
@@ -105,11 +119,11 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jLabelGeburtsname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jLabelGeburtsname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelGeburtsname.setText("Geburtsname");
+        jLabelGeburtsname.setText("Geburtsname*");
 
         jLabelFamilienname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jLabelFamilienname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelFamilienname.setText("Familienname");
+        jLabelFamilienname.setText("Familienname*");
 
         jTextFamilienname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jTextFamilienname.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -120,7 +134,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jLabelVorname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jLabelVorname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelVorname.setText("Vorname");
+        jLabelVorname.setText("Vorname*");
 
         jTextVorname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jTextVorname.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -147,7 +161,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jLabelGeburtsdatum.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jLabelGeburtsdatum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelGeburtsdatum.setText("Geburtsdatum");
+        jLabelGeburtsdatum.setText("Geburtsdatum*");
 
         jFormattedTextMenschGeburtsdatum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
         jFormattedTextMenschGeburtsdatum.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
@@ -330,14 +344,19 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             // vielleicht noch Dialogfenster, dass Daten einzutragen sind,
             // ergänzen
             textfeldNummer = checkTheInformations(textfeldNummer);
-        }
-        if (textfeldNummer == 0) {
-            kontrolliereDieDatenDerGui();
+            if (textfeldNummer == 0 && kontrolliereDieTextfelderDerGui()) {
+                gsVController.getMenschDatenKonkret();
+//                System.out.println("Zweitname 1:" + zweitname);
+            }
+        } else {
+            if (kontrolliereDieTextfelderDerGui()) {
+                gsVController.getMenschDatenKonkret();
+//                System.out.println("Zweitname 2:" + zweitname);
+            }
         }
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
     private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
-//        selectAllForAlljTextFields();
         if (loginDialog == null) {
             loginDialog = new LoginDialog(this);
         }
@@ -396,36 +415,37 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     // anderer Methodenname
     // besser: diese Aufgabe dem Controller übergeben, eigentlich darf die 
     //         GUI keine Geschätslogik enthalten
-    private void kontrolliereDieDatenDerGui() {
+    private boolean kontrolliereDieTextfelderDerGui() {
 //        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
         checkTheInformations((byte) 1);
         // die obige Funktion kann sorgt immer dafür, dass, falls Felder geändert
         // wurden, der neue Eintrag in die MenschDatenKonkret übernommen wird
         // ihr eigentlicher ursprünglicher Sinn war es, leere Felder zu 
         // lokalisieren und zu markieren
-        boolean everyTextFieldIsFilled = true;
+        boolean everyNecessaryTextFieldIsFilled = true;
         if (checkStringAndRequestFocusIfNecessary(jTextGeburtsname).length() == 0) {
-            everyTextFieldIsFilled = false;
+            everyNecessaryTextFieldIsFilled = false;
             checkTheInformations((byte) 1);
         }
         if (checkStringAndRequestFocusIfNecessary(jTextFamilienname).length() == 0) {
-            everyTextFieldIsFilled = false;
+            everyNecessaryTextFieldIsFilled = false;
             checkTheInformations((byte) 2);
         }
         if (checkStringAndRequestFocusIfNecessary(jTextVorname).length() == 0) {
-            everyTextFieldIsFilled = false;
+            everyNecessaryTextFieldIsFilled = false;
             checkTheInformations((byte) 3);
         }
-        if (checkStringAndRequestFocusIfNecessary(jTextZweitname).length() == 0) {
-            everyTextFieldIsFilled = false;
-            checkTheInformations((byte) 4);
-        }
+        // das Feld Zweitname ist nur optional, daher hier auskommentiert
+//        if (checkStringAndRequestFocusIfNecessary(jTextZweitname).length() == 0) {
+//            everyNecessaryTextFieldIsFilled = false;
+//            checkTheInformations((byte) 4);
+//        }
         if (checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum).length() == 0) {
-            everyTextFieldIsFilled = false;
+            everyNecessaryTextFieldIsFilled = false;
             checkTheInformations((byte) 5);
         }
 //        Marker.marker();
-        if (everyTextFieldIsFilled) {
+        if (everyNecessaryTextFieldIsFilled) {
 //            System.out.println(birthdayIsChecked());
 //            if (birthdayIsChecked()) {
             // kein Objekt erzeugen, sondern Controller informieren
@@ -441,14 +461,22 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                     .build();
 //                System.out.println("Menschdaten (in GUI02): " + mdk);
             System.out.println("GUI02 - Geburtsdatum: " + geburtsdatum);
-            gsVController.getMenschDatenKonkret();
+            if (gsVController.checkTheBirthdayInformations()) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(this, "Unsinniges Geburtsdatum, "
+                        + "die Person soll " + gsVController.getAlterFromModell() + " "
+                        + "Jahre alt sein?", "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                jFormattedTextMenschGeburtsdatum.requestFocus();
+                return false;
+            }
         } else {
-//                jFormattedTextMenschGeburtsdatum.setText("");
-            // hier sollte vielleicht besser ein Dialogfeld erscheinen,
-            // wo angezeigt wird, dass der Geburtstag sicher unsinnig ist
-            jFormattedTextMenschGeburtsdatum.requestFocus();
-//                jFormattedTextMenschGeburtsdatum.selectAll();
-//            }
+            // die folgende erste Codezeile dient nur zur Sicherheit, falls 
+            // jemand in der Zwischenzeit doch per Hand jemand ein Textfeld 
+            // geändert/geleert hat
+            checkTheInformations((byte) 1);
+            return false;
         }
     }
 
@@ -513,6 +541,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 //        return birthdayIsChecked;
 //    }
     private byte checkTheInformations(byte b) {
+//        Marker.marker();
         switch (b) {
             case 1:
                 geburtsname = checkStringAndRequestFocusIfNecessary(jTextGeburtsname);
@@ -532,12 +561,12 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                     return 3;
                 }
 //                break;
-            case 4:
+//            case 4:
                 zweitname = checkStringAndRequestFocusIfNecessary(jTextZweitname);
-                if (zweitname.length() == 0) {
-                    return 4;
-                }
-//                break;
+//                if (zweitname.length() == 0) {
+//                    return 4;
+//                }
+////                break;
             case 5:
                 geburtsdatum = checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum);
                 if (geburtsdatum.length() == 0) {
@@ -598,6 +627,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreatePerson;
     private javax.swing.JCheckBox jCheckBoxUnterrichtsfaecher;
+    private javax.swing.JDialog jDialogGeburtstagUnsinnig;
     private javax.swing.JFormattedTextField jFormattedTextMenschGeburtsdatum;
     private javax.swing.JLabel jLabelFamilienname;
     private javax.swing.JLabel jLabelGeburtsdatum;
@@ -692,7 +722,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         String[] geburtstagsArray = geburtsdatum.split("\\.");
 //        System.out.println(Arrays.toString(geburtstagsArray));
         tagDerGeburt.set(Integer.parseInt(geburtstagsArray[2]),
-                -1+Integer.parseInt(geburtstagsArray[1]),     // Monate sind 0-basiert
+                -1 + Integer.parseInt(geburtstagsArray[1]), // Monate sind 0-basiert
                 Integer.parseInt(geburtstagsArray[0]));
         return tagDerGeburt;
     }
@@ -724,7 +754,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 //            jTextField.selectAll();
 //        }
 //    }
-    private void fillAlljTextFields() {
+    private void addEveryjTextField() {
         alljTextFields.add(jTextFamilienname);
         alljTextFields.add(jTextGeburtsname);
         alljTextFields.add(jTextVorname);
