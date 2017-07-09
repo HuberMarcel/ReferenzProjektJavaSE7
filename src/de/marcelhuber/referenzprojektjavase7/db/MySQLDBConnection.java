@@ -2,6 +2,8 @@ package de.marcelhuber.referenzprojektjavase7.db;
 // DER SQL-Connector kann momentan auch Tables erstellen und löschen
 // Rein zu Testzwecken
 
+import de.marcelhuber.systemtools.PressEnter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -37,14 +39,14 @@ public enum MySQLDBConnection {
     private void initParameter() {
         Properties props = new Properties();
         try (FileReader fr = new FileReader("dbconnectionReferenzprojekt.properties")) {
-
             props.load(fr);
             // Verbindungsparameter aus properties-file
             host = props.getProperty("jdbc.host", "localhost" + ":3306");
             user = props.getProperty("jdbc.user");
             pass = props.getProperty("jdbc.pass");
             db = props.getProperty("jdbc.db");
-
+//            System.out.println("Where Am I? " + new File("").getAbsolutePath());
+//            PressEnter.toContinue();
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -52,6 +54,13 @@ public enum MySQLDBConnection {
         String url = "jdbc:mysql://" + host + "/" + db;
         try {
             // WICHTIG: Das Connection-Objekt erhalten wir über "den" DriverManager            
+////            System.out.println("Where Am I? " + new File("").getAbsolutePath());
+////            PressEnter.toContinue();
+//            try {
+//                Class.forName("com.mysql.jdbc.Driver");
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(MySQLDBConnection.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             connection = DriverManager.getConnection(url, user, pass);
             // mit dem Connection-Objekt können wir (versuchen,)  ein Statement (zu) erzeugen
             statement = connection.createStatement();
@@ -74,7 +83,6 @@ public enum MySQLDBConnection {
 //        }
 //        return anotherConnection;
 //    }
-
     public Connection getConnection() {
         // bessere Alternative zu getAnotherConnection
         try {

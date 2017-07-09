@@ -71,6 +71,8 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
         // Speichern der MenschDaten in die Datenbank über das DAO
         // falls Speichern fehlschlägt (bspw. Verbindungsabbruch unerwartet)
         // --> menschDatenKonkret = null setzen, sonst menschDatenKonkret = mdk
+        MySQLMenschRealDatenDao mySQLmdkDAO = new MySQLMenschRealDatenDao();
+        mySQLmdkDAO.create(mdk);
         benachrichtige();
     }
 

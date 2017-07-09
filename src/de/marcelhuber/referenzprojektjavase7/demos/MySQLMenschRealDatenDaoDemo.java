@@ -97,9 +97,9 @@ public class MySQLMenschRealDatenDaoDemo {
                 .build();
         System.out.println(marcelsDaten);
         System.out.println(marcelsDaten.getGeburtsDatumAsString());
-        PressEnter.toContinue();
+//        PressEnter.toContinue();
         mySQLDummyInsertDao.create(marcelsDaten);
-        PressEnter.toContinue();
+//        PressEnter.toContinue();
         Calendar saschasTagDerGeburt
                 = Calendar.getInstance();
         saschasTagDerGeburt.set(1978, Calendar.SEPTEMBER, 13);

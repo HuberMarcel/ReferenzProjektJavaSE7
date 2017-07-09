@@ -18,6 +18,12 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
         private String familienname;
         private String vorname;
         private String zweitname;
+        // der Zweitname ist optional, wir wollen später aber keine
+        // null-Einträge in die DB schreiben; daher initialisieren wir
+        // ihn immer als leeren String
+        {
+            zweitname = "";
+        }
         // wichtig: beim Geburtsdatum bei clone() beim Geburtsdatum ein neues Objekt rausgeben!!
         //          sonst kann das kopierte Onjekt mit dem getter auf das
         //          gleiche Objekt wie das ursprüngliche zugreifen, und jede Veränderung
@@ -73,6 +79,7 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
         this.setFamilienname(familienname);
         this.setVorname(vorname);
         this.setGeburtsDatum(geburtsDatum);
+        this.setZweitname("");
     }
 
     public MenschDatenKonkret(String geburtsname, String familienname, String vorname, String zweitname,
@@ -84,7 +91,6 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
 //    // Standardkonstruktor
 //    public MenschDatenKonkret() {
 //    }
-    
 //    // diese toString() wurde nun in die abstrakte Klasse verlagert, daher hier ganz auskom    
 //    @Override
 //    public String toString() {
@@ -103,7 +109,6 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
 //        }
 //        return returnString;
 //    }
-
     /**
      *
      * @return @throws CloneNotSupportedException

@@ -1,8 +1,10 @@
 package de.marcelhuber.referenzprojektjavase7.controller;
 
+import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.model.*;
 import de.marcelhuber.referenzprojektjavase7.view.*;
+import de.marcelhuber.systemtools.Marker;
 import java.util.*;
 
 /**
@@ -64,12 +66,31 @@ public class GrundschulVerwaltungController implements Observer {
 //        }
 
 //        gsVgModel.saveMenschDatenKonkret(gsVView.getMenschDatenKonkret());
-        MenschDatenKonkret mdk;
-        mdk = gsVView.getMenschDatenKonkret();
+////      Die folgenden zwei Zeilen sind alter Code
+//        MenschDatenKonkret mdk;
+//        mdk = gsVView.getMenschDatenKonkret();
+        MenschDatenKonkret mdk = buildMenschDatenKonkretWithDataFromView();
+        Marker.marker();
+        Marker.marker();
         System.out.println("Controller (getMenschDatenKonkret) - fixe Daten:");
         System.out.println(mdk);
+        Marker.marker('_');
         System.out.println("Controller (getMenschDatenKonkret) - Alter:\n"
                 + getAlterFromModell());
+        System.out.println("\n");
+        gsVgModel.saveMenschDatenKonkret(mdk);
+    }
+
+    private MenschDatenKonkret buildMenschDatenKonkretWithDataFromView() {
+        MenschDatenKonkret mdk;
+        mdk = new MenschDatenKonkret(gsVView.getGeburtsname(),
+                gsVView.getFamilienname(),
+                gsVView.getVorname(),
+                gsVView.getGeburtsdatum());
+        if (gsVView.getZweitname().length() != 0) {
+            mdk.setZweitname(gsVView.getZweitname());
+        }
+        return mdk;
     }
 
     public void showView() {

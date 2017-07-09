@@ -37,7 +37,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     @Override
-    public void create(MenschDatenKonkret mrD) {
+    public void create(MenschDatenKonkret mdk) {
         sql = "INSERT INTO `Mensch`"
                 + "("
                 + "`geburtsname`,"
@@ -47,11 +47,11 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 + "`geburtsdatum`"
                 + ") VALUES "
                 + "("
-                + "'" + mrD.getGeburtsname() + "', "
-                + "'" + mrD.getFamilienname() + "', "
-                + "'" + mrD.getVorname() + "', "
-                + "'" + mrD.getZweitname() + "', "
-                + "'" + mrD.getGeburtsDatumAsString() + "'"
+                + "'" + mdk.getGeburtsname() + "', "
+                + "'" + mdk.getFamilienname() + "', "
+                + "'" + mdk.getVorname() + "', "
+                + "'" + mdk.getZweitname() + "', "
+                + "'" + mdk.getGeburtsDatumAsString() + "'"
                 + ")";
         System.out.println(sql);
         modifiziere(sql);

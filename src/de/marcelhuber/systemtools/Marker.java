@@ -19,6 +19,14 @@ public class Marker {
         System.out.println(exclamationMark);
     }
 
+    static public void marker(char c) {
+        exclamationMark = new StringBuilder("");
+        for (int i = 0; i < 80; i++) {
+            exclamationMark.append(c);
+        }
+        marker();
+    }
+
 //    public static void main(String[] args) {
 //        marker();
 //    }

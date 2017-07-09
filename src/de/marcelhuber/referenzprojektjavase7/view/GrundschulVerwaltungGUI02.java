@@ -678,7 +678,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getGeburtsname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return geburtsname;
     }
 
     @Override
@@ -688,7 +688,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getFamilienname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return familienname;
     }
 
     @Override
@@ -698,7 +698,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getVorname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return vorname;
     }
 
     @Override
@@ -708,7 +708,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getZweitname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return zweitname;
     }
 
     @Override
