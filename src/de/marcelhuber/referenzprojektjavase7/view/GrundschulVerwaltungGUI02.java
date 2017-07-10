@@ -675,6 +675,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         for (JTextField jTextField : alljTextFields) {
             jTextField.setText("");
         }
+        jTextGeburtsname.requestFocus();
     }
 
     @Override

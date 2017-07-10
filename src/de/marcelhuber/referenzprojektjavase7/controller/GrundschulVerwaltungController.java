@@ -79,7 +79,7 @@ public class GrundschulVerwaltungController implements Observer {
                 + getAlterFromModell());
         System.out.println("\n");
         if (gsVgModel.saveMenschDatenKonkret(mdk)) {
-            gsVView.showInformation("Daten gespeichert", "Erfolg!");
+//            gsVView.showInformation("Daten gespeichert", "Erfolg!");
             gsVView.reset();
         } else {
             gsVView.showInformation("Daten konnten nicht gespeichert werden!", "error");
