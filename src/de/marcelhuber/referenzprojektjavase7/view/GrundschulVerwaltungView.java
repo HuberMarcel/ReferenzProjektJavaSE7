@@ -31,4 +31,7 @@ public interface GrundschulVerwaltungView {
     // MenschDatenKonkret
     MenschDatenKonkret getMenschDatenKonkret();
     boolean setMenschDatenKonkret(MenschDatenKonkret mdk);
+    void showInformation(String hinweis, String hinweisTyp);
+    // diese Methode soll im Wesentlichen dazu dienen, ein Dialogfeld für
+    // Fehlermeldungen anzuzeigen
 }

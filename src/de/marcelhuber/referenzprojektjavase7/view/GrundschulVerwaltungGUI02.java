@@ -345,12 +345,12 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             // ergänzen
             textfeldNummer = checkTheInformations(textfeldNummer);
             if (textfeldNummer == 0 && kontrolliereDieTextfelderDerGui()) {
-                gsVController.getMenschDatenKonkret();
+                gsVController.checkMenschDatenKonkretAndTryToSave();
 //                System.out.println("Zweitname 1:" + zweitname);
             }
         } else {
             if (kontrolliereDieTextfelderDerGui()) {
-                gsVController.getMenschDatenKonkret();
+                gsVController.checkMenschDatenKonkretAndTryToSave();
 //                System.out.println("Zweitname 2:" + zweitname);
             }
         }
@@ -464,10 +464,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
             if (gsVController.checkTheBirthdayInformations()) {
                 return true;
             } else {
-                JOptionPane.showMessageDialog(this, "Unsinniges Geburtsdatum, "
+                showInformation("Unsinniges Geburtsdatum, "
                         + "die Person soll " + gsVController.getAlterFromModell() + " "
-                        + "Jahre alt sein?", "ERROR",
-                        JOptionPane.ERROR_MESSAGE);
+                        + "Jahre alt sein?", "error");
                 jFormattedTextMenschGeburtsdatum.requestFocus();
                 return false;
             }
@@ -673,7 +672,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public void reset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (JTextField jTextField : alljTextFields) {
+            jTextField.setText("");
+        }
     }
 
     @Override
@@ -788,5 +789,16 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     public boolean setMenschDatenKonkret(MenschDatenKonkret mdk) {
         // TODO
         return false;
+    }
+
+    @Override
+    public void showInformation(String hinweis, String hinweisTyp) {
+        if (hinweisTyp.toLowerCase().contains("error")) {
+            JOptionPane.showMessageDialog(this, hinweis, hinweisTyp.toUpperCase(),
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, hinweis, hinweisTyp.toUpperCase(),
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }

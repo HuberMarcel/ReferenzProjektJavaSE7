@@ -13,7 +13,9 @@ public interface InterfaceMenschRealDatenDao {
 
     MenschDatenKonkret findMenschRealDatenById(int uid);
 
-    void create(MenschDatenKonkret mrD);
+    int create(MenschDatenKonkret mrD);
+    // liefert die Anzahl der modifizierten Datensätze zurück, hier erstmal
+    // 0 bei Fehlschlag, 1 bei Erfolg
 
     void delete(MenschDatenKonkret mrD);
 

@@ -37,7 +37,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     @Override
-    public void create(MenschDatenKonkret mdk) {
+    public int create(MenschDatenKonkret mdk) {
         sql = "INSERT INTO `Mensch`"
                 + "("
                 + "`geburtsname`,"
@@ -54,7 +54,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 + "'" + mdk.getGeburtsDatumAsString() + "'"
                 + ")";
         System.out.println(sql);
-        modifiziere(sql);
+        return modifiziere(sql);
     }
 
     @Override
@@ -67,12 +67,14 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private void modifiziere(String sql) {
+    private int modifiziere(String sql) {
+        int numberOfnewPersons = 0;
         try {
-            statement.executeUpdate(sql);
+            numberOfnewPersons = statement.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        return numberOfnewPersons;
     }
 
     public void closeConnection() {

@@ -529,4 +529,9 @@ public class GrundschulVerwaltungGUI01 extends javax.swing.JFrame implements Gru
         // TODO
         return false;
     }
+
+    @Override
+    public void showInformation(String hinweis, String hinweisTyp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

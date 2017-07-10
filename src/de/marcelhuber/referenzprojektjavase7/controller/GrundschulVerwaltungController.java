@@ -42,7 +42,7 @@ public class GrundschulVerwaltungController implements Observer {
         return gsVgModel.getAlter();
     }
 
-    public void getMenschDatenKonkret() {
+    public void checkMenschDatenKonkretAndTryToSave() {
         // Controller erzeugt Menschobjekt (MenschDaten) 
         // Controller ruft das Modell auf, und gibt Befehl zum Speichern
         // Modell prüft inhaltliche Korrektheit, nicht View
@@ -78,7 +78,12 @@ public class GrundschulVerwaltungController implements Observer {
         System.out.println("Controller (getMenschDatenKonkret) - Alter:\n"
                 + getAlterFromModell());
         System.out.println("\n");
-        gsVgModel.saveMenschDatenKonkret(mdk);
+        if (gsVgModel.saveMenschDatenKonkret(mdk)) {
+            gsVView.showInformation("Daten gespeichert", "Erfolg!");
+            gsVView.reset();
+        } else {
+            gsVView.showInformation("Daten konnten nicht gespeichert werden!", "error");
+        }
     }
 
     private MenschDatenKonkret buildMenschDatenKonkretWithDataFromView() {

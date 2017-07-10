@@ -38,7 +38,7 @@ public class MySQLMenschRealDatenDaoDemo {
                 ex.printStackTrace();
             }
         }
-        
+
         boolean checkSQLString = false;
         if (checkSQLString) {
             System.out.println(sql);
@@ -68,8 +68,18 @@ public class MySQLMenschRealDatenDaoDemo {
     }
 
     public static void main(String[] args) {
-        erzeugeTabelleMensch(false);
-        loescheTabelleMensch(false);
+        boolean bool01 = false;
+        boolean bool02 = false;
+        if (args.length == 2) {
+            if (args[0].toLowerCase().equals("true")) {
+                bool01 = true;
+            }
+            if (args[1].toLowerCase().equals("true")) {
+                bool02 = true;
+            }
+        }
+        erzeugeTabelleMensch(bool01);
+        loescheTabelleMensch(bool02);
         // Hinweis: Wenn die Connection geclosed wurde, kann man 
         //          nicht mehr wie in der insertNewMenschRealDaten()
         //          Daten in die SQL-DB hinzufügen - MySQLDBConnection ist 
