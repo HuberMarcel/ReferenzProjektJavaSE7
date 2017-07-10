@@ -3,13 +3,10 @@ package de.marcelhuber.referenzprojektjavase7.db;
 // Rein zu Testzwecken
 
 import de.marcelhuber.systemtools.PressEnter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,8 +44,9 @@ public enum MySQLDBConnection {
             db = props.getProperty("jdbc.db");
 //            System.out.println("Where Am I? " + new File("").getAbsolutePath());
 //            PressEnter.toContinue();
-        } catch (IOException ex) {
-            System.out.println(ex);
+        } catch (IOException ioEx) {
+            System.out.println(ioEx);
+            ioEx.printStackTrace();
         }
 
         String url = "jdbc:mysql://" + host + "/" + db;
@@ -66,8 +64,10 @@ public enum MySQLDBConnection {
             statement = connection.createStatement();
             System.out.println("MySQL-Verbindung erfolgreich hergestellt!");
         } catch (SQLException sqlex) {
-            System.out.println(sqlex);
+            PressEnter.toContinue();
+            System.err.println(sqlex);
             sqlex.printStackTrace();
+            System.out.println("Connection (Klasse MySQLDBConnection): " + connection);
         }
     }
 
@@ -86,13 +86,16 @@ public enum MySQLDBConnection {
     public Connection getConnection() {
         // bessere Alternative zu getAnotherConnection
         try {
-            if (connection.isClosed()) {
+            if (connection.isClosed() || connection == null) {
                 initParameter();
             }
         } catch (SQLException sqlex) {
             System.out.println(sqlex);
             sqlex.printStackTrace();
         }
+//        finally {
+//            System.out.println("Connection: " + connection);
+//        }
         return connection;
     }
 

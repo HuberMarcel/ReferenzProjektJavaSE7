@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,10 +20,14 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
-    String sql;
+    private String sql;
 
     // Connection wird hier durch den INI-Block aufgebaut und empfangen
     {
+        initConnectionAndStatement();
+    }
+
+    private void initConnectionAndStatement() {
         connection = MySQLDBConnection.INSTANCE.getConnection();
         statement = MySQLDBConnection.INSTANCE.getStatement();
     }
@@ -38,6 +44,16 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public int create(MenschDatenKonkret mdk) {
+        boolean connectionIsClosed = false;
+        try {
+            connectionIsClosed = connection.isClosed();
+        } catch (SQLException sqlEx) {
+            System.err.println(sqlEx);
+            sqlEx.printStackTrace();
+        }
+        if (connection == null || connectionIsClosed) {
+            initConnectionAndStatement();
+        }
         sql = "INSERT INTO `Mensch`"
                 + "("
                 + "`geburtsname`,"
@@ -53,6 +69,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 + "'" + mdk.getZweitname() + "', "
                 + "'" + mdk.getGeburtsDatumAsString() + "'"
                 + ")";
+
         System.out.println(sql);
         return modifiziere(sql);
     }
@@ -80,5 +97,4 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     public void closeConnection() {
         MySQLDBConnection.INSTANCE.closeConnection();
     }
-
 }
