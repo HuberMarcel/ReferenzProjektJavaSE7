@@ -51,6 +51,9 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
             System.err.println(sqlEx);
             sqlEx.printStackTrace();
         }
+        // Connection kann invalid sein
+        // eigene Methode "pruefe, ob Connection neu erstellt werden muss" schreiben
+        System.out.println("Connection: " + connection);
         if (connection == null || connectionIsClosed) {
             initConnectionAndStatement();
         }

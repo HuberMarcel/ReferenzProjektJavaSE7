@@ -5,7 +5,6 @@ package de.marcelhuber.referenzprojektjavase7.view;
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
-import de.marcelhuber.systemtools.Marker;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -372,7 +371,12 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
                 setUserRoleKontaktperson();
                 break;
             case EXTERN:
+                break;
             case NONE:
+                showInformation("Falsche/unbekannte Nutzereingaben!", "error");
+                loginDialog.showDialog();
+                break;
+            case BREAK:
                 break;
             default:
                 throw new AssertionError();

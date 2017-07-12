@@ -31,6 +31,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
+        setAlwaysOnTop(true);
 
         jLabel1.setText("Username");
 
@@ -105,19 +106,24 @@ public class LoginDialog extends javax.swing.JDialog {
 
     private void buttonCancleActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancleActionPerformed
         dispose();
+        userRole = EnumUserRole.BREAK;
     }//GEN-LAST:event_buttonCancleActionPerformed
 
     private void buttonOKActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         dispose();
         // prüfe ob Username / Password korrekt
-        if (textUsername.getText().equalsIgnoreCase("Marcel")) {
-            userRole = EnumUserRole.DIREKTOR;
-        } 
-        if (textUsername.getText().equalsIgnoreCase("Isabell")) {
-           userRole = EnumUserRole.KONTAKTPERSON;
-        }
-        if (textUsername.getText().equalsIgnoreCase("Stefan")) {
-           userRole = EnumUserRole.EXTERN;
+        switch (textUsername.getText().toLowerCase()) {
+            case "marcel":
+                userRole = EnumUserRole.DIREKTOR;
+                break;
+            case "isabell":
+                userRole = EnumUserRole.KONTAKTPERSON;
+                break;
+            case "stefan":
+                userRole = EnumUserRole.EXTERN;
+                break;
+            default:
+                userRole = EnumUserRole.NONE;
         }
     }//GEN-LAST:event_buttonOKActionPerformed
 
@@ -130,7 +136,7 @@ public class LoginDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_checkPasswordVisibleActionPerformed
 
     public void showDialog() {
-        userRole = EnumUserRole.NONE;
+        userRole = EnumUserRole.BREAK;
         textUsername.setText("");
         textPassword.setText("");
         setVisible(true);

@@ -9,7 +9,9 @@ public enum EnumUserRole {
     DIREKTOR("Direktor"),
     KONTAKTPERSON("Kontaktperson"),
     EXTERN("Extern"),
-    NONE("");
+    NONE(""),
+    BREAK("break"),
+    ;
     private boolean loginOK;
     private String userRole;
 
