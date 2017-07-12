@@ -2,11 +2,14 @@ package de.marcelhuber.referenzprojektjavase7.db;
 // DER SQL-Connector kann momentan auch Tables erstellen und löschen
 // Rein zu Testzwecken
 
+import de.marcelhuber.systemtools.Marker;
 import de.marcelhuber.systemtools.PressEnter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +31,7 @@ public enum MySQLDBConnection {
     private String user;
     private String pass;
     private String db;
+    private boolean connectionIsLosed;
 
     private MySQLDBConnection() {
         initParameter();
@@ -60,14 +64,17 @@ public enum MySQLDBConnection {
 //                Logger.getLogger(MySQLDBConnection.class.getName()).log(Level.SEVERE, null, ex);
 //            }
             connection = DriverManager.getConnection(url, user, pass);
+//            Connection connection2 = DriverManager.getConnection(url, user, pass);
             // mit dem Connection-Objekt können wir (versuchen,)  ein Statement (zu) erzeugen
             statement = connection.createStatement();
             System.out.println("MySQL-Verbindung erfolgreich hergestellt!");
+            System.out.println("Connection: " + connection);
+//            System.out.println("Connection2: " + connection2);
+            System.out.println("Statement: " + statement);
         } catch (SQLException sqlex) {
-            PressEnter.toContinue();
+            System.out.println("Connection (Klasse MySQLDBConnection): " + connection);
             System.err.println(sqlex);
             sqlex.printStackTrace();
-            System.out.println("Connection (Klasse MySQLDBConnection): " + connection);
         }
     }
 
@@ -84,14 +91,14 @@ public enum MySQLDBConnection {
 //        return anotherConnection;
 //    }
     public Connection getConnection() {
+        System.out.println("getConnection");
+        System.out.println("Connection:" + connection);
+//        PressEnter.toContinue();
         // bessere Alternative zu getAnotherConnection
-        try {
-            if (connection.isClosed() || connection == null) {
-                initParameter();
-            }
-        } catch (SQLException sqlex) {
-            System.out.println(sqlex);
-            sqlex.printStackTrace();
+        connectionIsLosed = checkIfConnectionIsLosed();
+        System.out.println("connectionIsLosed (MySQLDBConnection): " + connectionIsLosed);
+        if (connectionIsLosed) {
+            initParameter();
         }
 //        finally {
 //            System.out.println("Connection: " + connection);
@@ -135,5 +142,18 @@ public enum MySQLDBConnection {
 
     public void deleteTable(String table) {
         dropTable(table);
+    }
+
+    public boolean checkIfConnectionIsLosed() {
+        try {
+            if (connection == null || connection.isClosed() || !connection.isValid(1000)) {
+                return connectionIsLosed = true;
+            }
+        } catch (SQLException sqlex) {
+            System.out.println(sqlex);
+            sqlex.printStackTrace();
+            return connectionIsLosed = true;
+        }
+        return connectionIsLosed = false;
     }
 }

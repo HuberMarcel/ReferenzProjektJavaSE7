@@ -1,5 +1,6 @@
 package de.marcelhuber.referenzprojektjavase7.dao;
 
+import com.mysql.jdbc.MySQLConnection;
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.db.MySQLDBConnection;
@@ -21,6 +22,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     private Statement statement;
     private ResultSet resultSet;
     private String sql;
+    private boolean connectionIsLosed;
 
     // Connection wird hier durch den INI-Block aufgebaut und empfangen
     {
@@ -44,19 +46,11 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public int create(MenschDatenKonkret mdk) {
-        boolean connectionIsClosed = false;
-        try {
-            connectionIsClosed = connection.isClosed();
-        } catch (SQLException sqlEx) {
-            System.err.println(sqlEx);
-            sqlEx.printStackTrace();
-        }
+        connectionIsLosed = MySQLDBConnection.INSTANCE.checkIfConnectionIsLosed();
+        System.out.println("connection is losed: " + connectionIsLosed);
         // Connection kann invalid sein
         // eigene Methode "pruefe, ob Connection neu erstellt werden muss" schreiben
-        System.out.println("Connection: " + connection);
-        if (connection == null || connectionIsClosed) {
-            initConnectionAndStatement();
-        }
+        System.out.println("Connection (MySQLRealDatenDAO):            " + connection);
         sql = "INSERT INTO `Mensch`"
                 + "("
                 + "`geburtsname`,"
@@ -93,6 +87,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
             numberOfnewPersons = statement.executeUpdate(sql);
         } catch (SQLException ex) {
             System.out.println(ex);
+            return numberOfnewPersons;
         }
         return numberOfnewPersons;
     }
