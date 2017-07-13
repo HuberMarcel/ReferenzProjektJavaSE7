@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: GrundschulVerwaltungStartMVC
+Main-Class: de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungStartMVC
 Class-Path: .\..\build\classes\
