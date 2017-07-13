@@ -31,7 +31,7 @@ public enum MySQLDBConnection {
     private String user;
     private String pass;
     private String db;
-    private boolean connectionIsLosed;
+    private boolean connectionIsLost;
 
     private MySQLDBConnection() {
         initParameter();
@@ -95,9 +95,9 @@ public enum MySQLDBConnection {
         System.out.println("Connection:" + connection);
 //        PressEnter.toContinue();
         // bessere Alternative zu getAnotherConnection
-        connectionIsLosed = checkIfConnectionIsLosed();
-        System.out.println("connectionIsLosed (MySQLDBConnection): " + connectionIsLosed);
-        if (connectionIsLosed) {
+        connectionIsLost = checkIfConnectionIsLost();
+        System.out.println("connectionIsLost (MySQLDBConnection): " + connectionIsLost);
+        if (connectionIsLost) {
             initParameter();
         }
 //        finally {
@@ -144,16 +144,16 @@ public enum MySQLDBConnection {
         dropTable(table);
     }
 
-    public boolean checkIfConnectionIsLosed() {
+    public boolean checkIfConnectionIsLost() {
         try {
             if (connection == null || connection.isClosed() || !connection.isValid(1000)) {
-                return connectionIsLosed = true;
+                return connectionIsLost = true;
             }
         } catch (SQLException sqlex) {
             System.out.println(sqlex);
             sqlex.printStackTrace();
-            return connectionIsLosed = true;
+            return connectionIsLost = true;
         }
-        return connectionIsLosed = false;
+        return connectionIsLost = false;
     }
 }

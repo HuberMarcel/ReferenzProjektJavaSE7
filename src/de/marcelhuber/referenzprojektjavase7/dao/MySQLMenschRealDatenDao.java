@@ -19,7 +19,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     private Statement statement;
     private ResultSet resultSet;
     private String sql;
-    private boolean connectionIsLosed;
+    private boolean connectionIsLost;
 
     // Connection wird hier durch den INI-Block aufgebaut und empfangen
     {
@@ -43,8 +43,8 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public int create(MenschDatenKonkret mdk) {
-        connectionIsLosed = MySQLDBConnection.INSTANCE.checkIfConnectionIsLosed();
-        System.out.println("connection is losed: " + connectionIsLosed);
+        connectionIsLost = MySQLDBConnection.INSTANCE.checkIfConnectionIsLost();
+        System.out.println("connection is lost: " + connectionIsLost);
         // Connection kann invalid sein
         // eigene Methode "pruefe, ob Connection neu erstellt werden muss" schreiben
         System.out.println("Connection (MySQLRealDatenDAO):            " + connection);
