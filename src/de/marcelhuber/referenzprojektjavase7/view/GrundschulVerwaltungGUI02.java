@@ -84,11 +84,10 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jButtonCreatePerson = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
-        jMenuItemDirektor = new javax.swing.JMenuItem();
-        jMenuItemExtern = new javax.swing.JMenuItem();
         jMenuItemLogin = new javax.swing.JMenuItem();
         jMenuOptionales = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemStundenplaene = new javax.swing.JMenuItem();
+        jMenuItemRaumbelegung = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDialogGeburtstagUnsinnigLayout = new javax.swing.GroupLayout(jDialogGeburtstagUnsinnig.getContentPane());
         jDialogGeburtstagUnsinnig.getContentPane().setLayout(jDialogGeburtstagUnsinnigLayout);
@@ -269,17 +268,6 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jMenuUserLogin.setText("User-Login");
 
-        jMenuItemDirektor.setText("Direktor");
-        jMenuItemDirektor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDirektorActionPerformed(evt);
-            }
-        });
-        jMenuUserLogin.add(jMenuItemDirektor);
-
-        jMenuItemExtern.setText("Extern");
-        jMenuUserLogin.add(jMenuItemExtern);
-
         jMenuItemLogin.setText("Login");
         jMenuItemLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,8 +280,11 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         jMenuOptionales.setText("Optionales");
 
-        jMenuItem1.setText("Stundenpläne");
-        jMenuOptionales.add(jMenuItem1);
+        jMenuItemStundenplaene.setText("Stundenpläne");
+        jMenuOptionales.add(jMenuItemStundenplaene);
+
+        jMenuItemRaumbelegung.setText("Raumbelegung");
+        jMenuOptionales.add(jMenuItemRaumbelegung);
 
         jMenuBar1.add(jMenuOptionales);
 
@@ -316,10 +307,6 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItemDirektorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDirektorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemDirektorActionPerformed
 
     private void jTextGeburtsnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextGeburtsnameActionPerformed
         // TODO add your handling code here:
@@ -639,10 +626,9 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     private javax.swing.JLabel jLabelZweitname;
     private javax.swing.JList jListUnterrichtsfaecher;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItemDirektor;
-    private javax.swing.JMenuItem jMenuItemExtern;
     private javax.swing.JMenuItem jMenuItemLogin;
+    private javax.swing.JMenuItem jMenuItemRaumbelegung;
+    private javax.swing.JMenuItem jMenuItemStundenplaene;
     private javax.swing.JMenu jMenuOptionales;
     private javax.swing.JMenu jMenuUserLogin;
     private javax.swing.JPanel jPanelDirektor;

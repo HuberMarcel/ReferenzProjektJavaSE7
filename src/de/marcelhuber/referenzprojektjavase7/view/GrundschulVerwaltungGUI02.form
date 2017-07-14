@@ -24,19 +24,6 @@
             <Property name="text" type="java.lang.String" value="User-Login"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDirektor">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Direktor"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDirektorActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemExtern">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Extern"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemLogin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login"/>
@@ -52,9 +39,14 @@
             <Property name="text" type="java.lang.String" value="Optionales"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemStundenplaene">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Stundenpl&#xe4;ne"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRaumbelegung">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Raumbelegung"/>
               </Properties>
             </MenuItem>
           </SubComponents>
