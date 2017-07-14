@@ -7,7 +7,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -20,6 +24,14 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     private ResultSet resultSet;
     private String sql;
     private boolean connectionIsLost;
+    private String[] columns = {
+        "id",
+        "geburtsname",
+        "familienname",
+        "vorname",
+        "zweitname",
+        "geburtsdatum"
+    };
 
     // Connection wird hier durch den INI-Block aufgebaut und empfangen
     {
@@ -33,7 +45,49 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<MenschDatenKonkret> menschDaten = new ArrayList<>();
+
+        String sql = "SELECT * FROM `mensch`";
+        try (ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                menschDaten.add(getMenschDatenFromResultSet(resultSet));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return menschDaten;
+    }
+
+    private MenschDatenKonkret getMenschDatenFromResultSet(ResultSet resultSet) throws SQLException {
+        System.out.println("Neuer Datensatz:");
+        System.out.println("Geburtsname:   " + resultSet.getString(columns[1]));
+        System.out.println("Familiennname: " + resultSet.getString(columns[2]));
+        System.out.println("Vorname:       " + resultSet.getString(columns[3]));
+        System.out.println("Zweitname:     " + resultSet.getString(columns[4]));
+        System.out.println("Geburtsdatum:  " + resultSet.getString(columns[5]));
+        System.out.println("");
+
+        Calendar birthdayOfMdkDummy = Calendar.getInstance();
+//        System.out.println(resultSet.getString(columns[5]));
+        String[] birthdayAsStringArray = resultSet.getString(columns[5]).split("\\.");
+//        System.out.println(Arrays.toString(birthdayAsStringArray));
+        if (birthdayAsStringArray.length != 3) {
+            throw new SQLException("Geburtstagsfeldeintrag fehlerhaft!");
+        }
+        int bYear = Integer.parseInt(birthdayAsStringArray[2]);
+        int bMonth = Integer.parseInt(birthdayAsStringArray[1]);
+        int bDay = Integer.parseInt(birthdayAsStringArray[0]);
+        birthdayOfMdkDummy.set(bYear, bMonth - 1, bDay);       // Monate werden in Java 0-basiert gezählt
+        MenschDatenKonkret mdkDummy = new MenschDatenKonkret.Builder()
+                .geburtsname(resultSet.getString(columns[1]))
+                .familienname(resultSet.getString(columns[2]))
+                .vorname(resultSet.getString(columns[3]))
+                .zweitname(resultSet.getString(columns[4]))
+                .geburtsDatum(birthdayOfMdkDummy)
+                .build();
+        System.out.println(mdkDummy);
+        return mdkDummy;
     }
 
     @Override

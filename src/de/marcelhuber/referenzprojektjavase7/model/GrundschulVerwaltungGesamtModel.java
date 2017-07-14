@@ -158,4 +158,11 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     public int getAlter() {
         return alter;
     }
+
+    public MySQLMenschRealDatenDao getMenschRealDatenDao() {
+        if (menschRealDatenDao == null) {
+            menschRealDatenDao = new MySQLMenschRealDatenDao();
+        }
+        return menschRealDatenDao;
+    }
 }

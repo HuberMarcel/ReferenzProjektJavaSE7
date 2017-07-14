@@ -101,4 +101,12 @@ public class GrundschulVerwaltungController implements Observer {
     public void showView() {
         this.gsVView.showView();
     }
+
+//    public GrundschulVerwaltungGesamtModel getGsVgModel() {
+//        return gsVgModel;
+//    }
+//
+//    public GrundschulVerwaltungView getGsVView() {
+//        return gsVView;
+//    }
 }

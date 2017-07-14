@@ -652,6 +652,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
 
     @Override
     public void setController(GrundschulVerwaltungController gsVController) {
+//        System.out.println("Controller ist gesetzt! --> " + gsVController);
         this.gsVController = gsVController;
     }
 
