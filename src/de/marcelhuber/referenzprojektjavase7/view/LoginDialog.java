@@ -125,6 +125,7 @@ public class LoginDialog extends javax.swing.JDialog {
             default:
                 userRole = EnumUserRole.NONE;
         }
+//        System.out.println("userRole in Dialog: " + userRole);
     }//GEN-LAST:event_buttonOKActionPerformed
 
     private void checkPasswordVisibleActionPerformed(ActionEvent evt) {//GEN-FIRST:event_checkPasswordVisibleActionPerformed

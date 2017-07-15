@@ -343,30 +343,43 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
     private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
+        int counterOfLoginTriesWithThisLoginDialog = 0;
+        int maxNumberOfLoginTries = 2;
+        // nach  maxNumberOfLoginTries  Fehlschlägen kein erneuter Login-Versuch 
+        // durch automatisches Anzeigen des hiesigen Login-Dialogs
+        // --> Login-Button muss dann erneut gedrückt werden
+        // Hinweis:  maxNumberOfLoginTries >= 1
+        EnumUserRole userRole;
         if (loginDialog == null) {
             loginDialog = new LoginDialog(this);
         }
 
-        loginDialog.showDialog();
-
-        resetUserRole();
-        switch (loginDialog.getUserRole()) {
-            case DIREKTOR:
-                setUserRoleDirektor();
-                break;
-            case KONTAKTPERSON:
-                setUserRoleKontaktperson();
-                break;
-            case EXTERN:
-                break;
-            case NONE:
-                showInformation("Falsche/unbekannte Nutzereingaben!", "error");
-                loginDialog.showDialog();
-                break;
-            case BREAK:
-                break;
-            default:
-                throw new AssertionError();
+        while (counterOfLoginTriesWithThisLoginDialog < maxNumberOfLoginTries) {
+            counterOfLoginTriesWithThisLoginDialog++;
+            resetUserRoleView();
+            loginDialog.showDialog();
+            userRole = loginDialog.getUserRole();
+            switch (userRole) {
+                case DIREKTOR:
+                    setUserRoleDirektor();
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case KONTAKTPERSON:
+                    setUserRoleKontaktperson();
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case EXTERN:
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case NONE:
+                    showInformation("Falsche/unbekannte Nutzereingaben!", "error");
+                    break;
+                case BREAK:
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                default:
+                    throw new AssertionError();
+            }
         }
 
 //        if (loginDialog.isLoginOK()) {
@@ -766,7 +779,7 @@ public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements Gru
         jTextGeburtsname.requestFocus();
     }
 
-    private void resetUserRole() {
+    private void resetUserRoleView() {
         setShowjPanelDirektor(false);
         setShowjPanelFixMensch(false);
         setAlljTextFieldsDisabled();
