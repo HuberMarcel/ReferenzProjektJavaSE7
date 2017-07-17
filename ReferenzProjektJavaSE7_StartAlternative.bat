@@ -1,0 +1,1 @@
+java -cp .\dist\lib\*;.\dist\* de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungStartMVC
