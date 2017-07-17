@@ -2,14 +2,10 @@ package de.marcelhuber.referenzprojektjavase7.db;
 // DER SQL-Connector kann momentan auch Tables erstellen und löschen
 // Rein zu Testzwecken
 
-import de.marcelhuber.systemtools.Marker;
-import de.marcelhuber.systemtools.PressEnter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
