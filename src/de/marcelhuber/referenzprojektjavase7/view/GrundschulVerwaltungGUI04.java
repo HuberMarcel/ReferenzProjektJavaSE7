@@ -6,15 +6,18 @@ package de.marcelhuber.referenzprojektjavase7.view;
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
-import de.marcelhuber.referenzprojektjavase7.model.GrundschulVerwaltungGesamtModel;
+import de.marcelhuber.systemtools.Pause;
+import de.marcelhuber.systemtools.PressEnter;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,8 +27,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     private MenschTableModel menschTableModel;
     private LoginDialog loginDialog;
+    private boolean showjScrollPaneTableMenschDaten;
     private boolean showjPanelDirektor;
-    private boolean showjPanelFixMensch;
+    private boolean showjPanelMenschDatenVerwaltung;
     private MenschDatenKonkret mdk;
     private String geburtsname;
     private String familienname;
@@ -54,6 +58,12 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     public GrundschulVerwaltungGUI04() {
         menschTableModel = new MenschTableModel();
         initComponents();
+        alljTextFields = new ArrayList<>();
+        alljTextFields = new ArrayList<>();
+        addEveryjTextField();
+        setShowjScrollPaneTableMenschDaten(false);
+        setShowjPanelDirektor(false);
+        setShowjPanelMenschDatenVerwaltung(false);
     }
 
     /**
@@ -66,9 +76,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     private void initComponents() {
 
         jDialogGeburtstagUnsinnig = new javax.swing.JDialog();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanelFixMensch = new javax.swing.JPanel();
+        jScrollPaneTableMenschDaten = new javax.swing.JScrollPane();
+        jTableMenschDaten = new javax.swing.JTable();
+        jPanelMenschDatenVerwaltung = new javax.swing.JPanel();
         jTextGeburtsname = new javax.swing.JTextField();
         jLabelGeburtsname = new javax.swing.JLabel();
         jLabelFamilienname = new javax.swing.JLabel();
@@ -105,8 +115,8 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grundschulverwaltungs-Software");
 
-        jTable1.setModel(menschTableModel);
-        jScrollPane1.setViewportView(jTable1);
+        jTableMenschDaten.setModel(menschTableModel);
+        jScrollPaneTableMenschDaten.setViewportView(jTableMenschDaten);
 
         jTextGeburtsname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
         jTextGeburtsname.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -174,47 +184,47 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
             }
         });
 
-        javax.swing.GroupLayout jPanelFixMenschLayout = new javax.swing.GroupLayout(jPanelFixMensch);
-        jPanelFixMensch.setLayout(jPanelFixMenschLayout);
-        jPanelFixMenschLayout.setHorizontalGroup(
-            jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFixMenschLayout.createSequentialGroup()
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout jPanelMenschDatenVerwaltungLayout = new javax.swing.GroupLayout(jPanelMenschDatenVerwaltung);
+        jPanelMenschDatenVerwaltung.setLayout(jPanelMenschDatenVerwaltungLayout);
+        jPanelMenschDatenVerwaltungLayout.setHorizontalGroup(
+            jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenschDatenVerwaltungLayout.createSequentialGroup()
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelFamilienname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelVorname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelZweitname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelGeburtsname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelGeburtsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addComponent(jTextZweitname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextVorname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFamilienname, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextGeburtsname, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
-        jPanelFixMenschLayout.setVerticalGroup(
-            jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFixMenschLayout.createSequentialGroup()
+        jPanelMenschDatenVerwaltungLayout.setVerticalGroup(
+            jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenschDatenVerwaltungLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelGeburtsname)
                     .addComponent(jTextGeburtsname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFamilienname)
                     .addComponent(jTextFamilienname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVorname)
                     .addComponent(jTextVorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelZweitname)
                     .addComponent(jTextZweitname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelMenschDatenVerwaltungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelGeburtsdatum)
                     .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(283, 283, 283))
@@ -253,7 +263,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
                     .addGroup(jPanelDirektorLayout.createSequentialGroup()
                         .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDirektorLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonCreatePerson)))
@@ -262,13 +272,12 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jPanelDirektorLayout.setVerticalGroup(
             jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDirektorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxUnterrichtsfaecher)
                     .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCreatePerson)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(jButtonCreatePerson))
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -299,56 +308,83 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+            .addComponent(jScrollPaneTableMenschDaten, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelFixMensch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelMenschDatenVerwaltung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelDirektor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 477, Short.MAX_VALUE))
+                .addComponent(jScrollPaneTableMenschDaten, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 524, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(206, 206, 206)
-                    .addComponent(jPanelFixMensch, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(200, Short.MAX_VALUE)))
+                    .addComponent(jPanelMenschDatenVerwaltung, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(247, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 469, Short.MAX_VALUE)
-                    .addComponent(jPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(473, Short.MAX_VALUE)
+                    .addComponent(jPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(100, 100, 100)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoginActionPerformed
+        int counterOfLoginTriesWithThisLoginDialog = 0;
+        int maxNumberOfLoginTries = 2;
+        // nach  maxNumberOfLoginTries  Fehlschlägen kein erneuter Login-Versuch 
+        // durch automatisches Anzeigen des hiesigen Login-Dialogs
+        // --> Login-Button muss dann erneut gedrückt werden
+        // Hinweis:  maxNumberOfLoginTries >= 1
+        EnumUserRole userRole;
         if (loginDialog == null) {
             loginDialog = new LoginDialog(this);
         }
 
-        loginDialog.showDialog();
+        while (counterOfLoginTriesWithThisLoginDialog < maxNumberOfLoginTries) {
+            counterOfLoginTriesWithThisLoginDialog++;
+            resetUserRoleView();
+            loginDialog.showDialog();
+            userRole = loginDialog.getUserRole();
+            switch (userRole) {
+                case DIREKTOR:
+                    setUserRoleDirektor();
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case KONTAKTPERSON:
+                    setUserRoleKontaktperson();
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case EXTERN:
+                    setUserRoleExtern();
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                case NONE:
+                    showInformation("Falsche/unbekannte Nutzereingaben!", "error");
+                    break;
+                case BREAK:
+                    counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+        }
 
-//        resetUserRole();
-//        switch (loginDialog.getUserRole()) {
-//            case DIREKTOR:
-//                setUserRoleDirektor();
-//                break;
-//            case KONTAKTPERSON:
-//                setUserRoleKontaktperson();
-//                break;
-//            case EXTERN:
-//                break;
-//            case NONE:
-//                showInformation("Falsche/unbekannte Nutzereingaben!", "error");
-//                loginDialog.showDialog();
-//                break;
-//            case BREAK:
-//                break;
-//            default:
-//                throw new AssertionError();
+//        if (loginDialog.isLoginOK()) {
+//            setShowjPanelMenschDatenVerwaltung(true);
+//            jTextGeburtsname.requestFocus();
+//            setShowjPanelDirektor(true);
+//            setAlljTextFieldsEnabled();
+//        } else {
+//            setShowjPanelMenschDatenVerwaltung(true);
+//            jTextGeburtsname.requestFocus();
+//            setAlljTextFieldsDisabled();
+//            setShowjPanelDirektor(false);
 //        }
     }//GEN-LAST:event_jMenuItemLoginActionPerformed
 
@@ -380,6 +416,10 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jFormattedTextMenschGeburtsdatum.selectAll();
     }//GEN-LAST:event_jFormattedTextMenschGeburtsdatumFocusGained
 
+    // eigentlich sollte die GUI nur kontrollieren, ob die Einträge OK
+    // anderer Methodenname
+    // besser: diese Aufgabe dem Controller übergeben, eigentlich darf die 
+    //         GUI keine Geschätslogik enthalten
     private boolean kontrolliereDieTextfelderDerGui() {
 //        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
         checkTheInformations((byte) 1);
@@ -468,8 +508,6 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
                 //                System.out.println("Zweitname 2:" + zweitname);
             }
         }
-
-
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
     /**
@@ -525,10 +563,10 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     private javax.swing.JMenu jMenuOptionales;
     private javax.swing.JMenu jMenuUserLogin;
     private javax.swing.JPanel jPanelDirektor;
-    private javax.swing.JPanel jPanelFixMensch;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanelMenschDatenVerwaltung;
+    private javax.swing.JScrollPane jScrollPaneTableMenschDaten;
     private javax.swing.JScrollPane jScrollPanelDirektor;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableMenschDaten;
     private javax.swing.JTextField jTextFamilienname;
     private javax.swing.JTextField jTextGeburtsname;
     private javax.swing.JTextField jTextVorname;
@@ -536,6 +574,14 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     // End of variables declaration//GEN-END:variables
 
     private GrundschulVerwaltungController gsVController;
+
+    @Override
+    public boolean setGeburtsdatum(Calendar geburtsdatum) {
+        boolean geburtsdatumIsAccepted = false;
+        // TODO: Genaue Implementierung
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return geburtsdatumIsAccepted;
+    }
 
     @Override
     public void setController(GrundschulVerwaltungController gsVController) {
@@ -550,12 +596,15 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public void reset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (JTextField jTextField : alljTextFields) {
+            jTextField.setText("");
+        }
+        jTextGeburtsname.requestFocus();
     }
 
     @Override
     public String getGeburtsname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return geburtsname;
     }
 
     @Override
@@ -565,7 +614,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getFamilienname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return familienname;
     }
 
     @Override
@@ -575,7 +624,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getVorname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return vorname;
     }
 
     @Override
@@ -585,7 +634,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public String getZweitname() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return zweitname;
     }
 
     @Override
@@ -595,27 +644,107 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public Calendar getGeburtsdatum() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Calendar tagDerGeburt = Calendar.getInstance();
+        String[] geburtstagsArray = geburtsdatum.split("\\.");
+//        System.out.println(Arrays.toString(geburtstagsArray));
+        tagDerGeburt.set(Integer.parseInt(geburtstagsArray[2]),
+                -1 + Integer.parseInt(geburtstagsArray[1]), // Monate sind 0-basiert
+                Integer.parseInt(geburtstagsArray[0]));
+        return tagDerGeburt;
     }
 
-    @Override
-    public boolean setGeburtsdatum(Calendar geburtsdatum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void setShowjScrollPaneTableMenschDaten(boolean showjScrollPaneTableMenschDaten) {
+        this.showjScrollPaneTableMenschDaten = showjScrollPaneTableMenschDaten;
+        jScrollPaneTableMenschDaten.setVisible(showjScrollPaneTableMenschDaten);
+        // die folgenden Zeilen werden lediglich benötig, um das Frame neu zu zeichen
+        // denn aus irgendeinem Grund wird sonst die Tabelle nicht direkt angezeigt 
+        // (Bug in Swing oder ein Bug in meinem Code, den ich nicht lokalisieren kann)
+        int thisWidth = this.getSize().width;
+        int thisHeight = this.getSize().height;
+        this.setSize(thisWidth - 1, thisHeight);
+        this.setSize(thisWidth, thisHeight);
+    }
+
+    private void setShowjPanelDirektor(boolean showjPanelDirektor) {
+        this.showjPanelDirektor = showjPanelDirektor;
+        jPanelDirektor.setVisible(showjPanelDirektor);
+    }
+
+    private void setShowjPanelMenschDatenVerwaltung(boolean showjPanelMenschDatenVerwaltung) {
+        this.showjPanelMenschDatenVerwaltung = showjPanelMenschDatenVerwaltung;
+        jPanelMenschDatenVerwaltung.setVisible(showjPanelMenschDatenVerwaltung);
+    }
+
+    private void setAlljTextFieldsDisabled() {
+        for (JTextField jTextField : alljTextFields) {
+            jTextField.setEnabled(false);
+        }
+    }
+
+    private void setAlljTextFieldsEnabled() {
+        for (JTextField jTextField : alljTextFields) {
+            jTextField.setEnabled(true);
+        }
+    }
+
+//    private void selectAllForAlljTextFields() {
+//        for (JTextField jTextField : alljTextFields) {
+//            jTextField.selectAll();
+//        }
+//    }
+    private void addEveryjTextField() {
+        alljTextFields.add(jTextFamilienname);
+        alljTextFields.add(jTextGeburtsname);
+        alljTextFields.add(jTextVorname);
+        alljTextFields.add(jTextZweitname);
+        alljTextFields.add(jFormattedTextMenschGeburtsdatum);
+    }
+
+    private void setUserRoleDirektor() {
+        setUserRoleKontaktperson();
+        setShowjPanelMenschDatenVerwaltung(true);
+        setShowjPanelDirektor(true);
+        setAlljTextFieldsEnabled();
+    }
+
+    private void setUserRoleKontaktperson() {
+        setShowjScrollPaneTableMenschDaten(true);
+//        setShowjPanelMenschDatenVerwaltung(false);
+//        jTextGeburtsname.requestFocus();
+    }
+
+    private void setUserRoleExtern() {
+        resetUserRoleView();
+        showInformation("Externe User haben keine Berechtigungen!", "error");
+    }
+
+    private void resetUserRoleView() {
+        setShowjScrollPaneTableMenschDaten(false);
+        setShowjPanelDirektor(false);
+        setShowjPanelMenschDatenVerwaltung(false);
+        setAlljTextFieldsDisabled();
     }
 
     @Override
     public MenschDatenKonkret getMenschDatenKonkret() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mdk;
     }
 
     @Override
     public boolean setMenschDatenKonkret(MenschDatenKonkret mdk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO
+        return false;
     }
 
     @Override
     public void showInformation(String hinweis, String hinweisTyp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (hinweisTyp.toLowerCase().contains("error")) {
+            JOptionPane.showMessageDialog(this, hinweis, hinweisTyp.toUpperCase(),
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, hinweis, hinweisTyp.toUpperCase(),
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private byte checkTheInformations(byte b) {

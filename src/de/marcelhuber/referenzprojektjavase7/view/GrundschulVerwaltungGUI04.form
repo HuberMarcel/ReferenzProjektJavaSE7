@@ -78,46 +78,47 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="786" max="32767" attributes="0"/>
+          <Component id="jScrollPaneTableMenschDaten" alignment="0" pref="854" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="jPanelFixMensch" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanelMenschDatenVerwaltung" alignment="0" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-              <Component id="jPanelDirektor" alignment="0" max="32767" attributes="0"/>
+              <Component id="jPanelDirektor" alignment="1" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="208" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
+              <Component id="jScrollPaneTableMenschDaten" min="-2" pref="208" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="524" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                  <Component id="jPanelFixMensch" min="-2" pref="279" max="-2" attributes="0"/>
-                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                  <Component id="jPanelMenschDatenVerwaltung" min="-2" pref="279" max="-2" attributes="0"/>
+                  <EmptySpace pref="247" max="32767" attributes="0"/>
               </Group>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="469" max="32767" attributes="0"/>
+                  <EmptySpace pref="473" max="32767" attributes="0"/>
                   <Component id="jPanelDirektor" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneTableMenschDaten">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jTableMenschDaten">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="menschTableModel" type="code"/>
@@ -126,7 +127,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelFixMensch">
+    <Container class="javax.swing.JPanel" name="jPanelMenschDatenVerwaltung">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -141,7 +142,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jFormattedTextMenschGeburtsdatum" alignment="0" pref="570" max="32767" attributes="0"/>
+                      <Component id="jFormattedTextMenschGeburtsdatum" alignment="0" pref="638" max="32767" attributes="0"/>
                       <Component id="jTextZweitname" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextVorname" alignment="0" max="32767" attributes="0"/>
                       <Component id="jTextFamilienname" alignment="0" max="32767" attributes="0"/>
@@ -297,7 +298,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jCheckBoxUnterrichtsfaecher" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPanelDirektor" pref="576" max="32767" attributes="0"/>
+                          <Component id="jScrollPanelDirektor" pref="644" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -311,14 +312,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jCheckBoxUnterrichtsfaecher" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPanelDirektor" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonCreatePerson" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
