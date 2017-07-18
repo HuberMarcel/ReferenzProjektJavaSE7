@@ -5,6 +5,7 @@ package de.marcelhuber.referenzprojektjavase7.view;
 
 import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungController;
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
+import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.systemtools.Pause;
 import de.marcelhuber.systemtools.PressEnter;
@@ -26,6 +27,7 @@ import javax.swing.table.AbstractTableModel;
 public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements GrundschulVerwaltungView {
 
     private MenschTableModel menschTableModel;
+    private int selectedRowIndex;
     private LoginDialog loginDialog;
     private boolean showjScrollPaneTableMenschDaten;
     private boolean showjPanelDirektor;
@@ -94,6 +96,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jListUnterrichtsfaecher = new javax.swing.JList();
         jCheckBoxUnterrichtsfaecher = new javax.swing.JCheckBox();
         jButtonCreatePerson = new javax.swing.JButton();
+        jButtonDeletePersonFromTable = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemLogin = new javax.swing.JMenuItem();
@@ -116,6 +119,11 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         setTitle("Grundschulverwaltungs-Software");
 
         jTableMenschDaten.setModel(menschTableModel);
+        jTableMenschDaten.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTableMenschDatenFocusGained(evt);
+            }
+        });
         jScrollPaneTableMenschDaten.setViewportView(jTableMenschDaten);
 
         jTextGeburtsname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
@@ -254,19 +262,28 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
             }
         });
 
+        jButtonDeletePersonFromTable.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jButtonDeletePersonFromTable.setText("Ausgwählte Person löschen");
+        jButtonDeletePersonFromTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletePersonFromTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDirektorLayout = new javax.swing.GroupLayout(jPanelDirektor);
         jPanelDirektor.setLayout(jPanelDirektorLayout);
         jPanelDirektorLayout.setHorizontalGroup(
             jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDirektorLayout.createSequentialGroup()
-                        .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDirektorLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCreatePerson)))
+                        .addComponent(jButtonDeletePersonFromTable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCreatePerson))
+                    .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelDirektorLayout.setVerticalGroup(
@@ -277,7 +294,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
                     .addComponent(jCheckBoxUnterrichtsfaecher)
                     .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCreatePerson))
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonCreatePerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDeletePersonFromTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -363,6 +382,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
                 case EXTERN:
                     setUserRoleExtern();
                     counterOfLoginTriesWithThisLoginDialog = maxNumberOfLoginTries;
+                    System.exit(0);
                     break;
                 case NONE:
                     showInformation("Falsche/unbekannte Nutzereingaben!", "error");
@@ -501,6 +521,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
             if (textfeldNummer == 0 && kontrolliereDieTextfelderDerGui()) {
                 gsVController.checkMenschDatenKonkretAndTryToSave();
                 //                System.out.println("Zweitname 1:" + zweitname);
+                menschTableModel.updateModel();
             }
         } else {
             if (kontrolliereDieTextfelderDerGui()) {
@@ -509,6 +530,19 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
             }
         }
     }//GEN-LAST:event_jButtonCreatePersonActionPerformed
+
+    private void jButtonDeletePersonFromTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletePersonFromTableActionPerformed
+        selectedRowIndex = jTableMenschDaten.getSelectedRow();
+        if (selectedRowIndex != -1) {
+            menschTableModel.mdkToModifyOrDelete = menschTableModel.getMenschDatenKonkret(selectedRowIndex);
+            menschTableModel.deleteChoosenPerson();
+        }
+        menschTableModel.updateModel();
+    }//GEN-LAST:event_jButtonDeletePersonFromTableActionPerformed
+
+    private void jTableMenschDatenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableMenschDatenFocusGained
+        selectedRowIndex = jTableMenschDaten.getSelectedRow();
+    }//GEN-LAST:event_jTableMenschDatenFocusGained
 
     /**
      * @param args the command line arguments
@@ -547,6 +581,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCreatePerson;
+    private javax.swing.JButton jButtonDeletePersonFromTable;
     private javax.swing.JCheckBox jCheckBoxUnterrichtsfaecher;
     private javax.swing.JDialog jDialogGeburtstagUnsinnig;
     private javax.swing.JFormattedTextField jFormattedTextMenschGeburtsdatum;
@@ -596,6 +631,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     @Override
     public void reset() {
+        menschTableModel.updateModel();
+//        jTableMenschDaten.changeSelection(- 1, 0,
+//                true, false);
         for (JTextField jTextField : alljTextFields) {
             jTextField.setText("");
         }
@@ -799,7 +837,8 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //    class MenschTableModel implements TableModel {
     class MenschTableModel extends AbstractTableModel {
 
-        private MySQLMenschRealDatenDao myMenschDatenDao;
+        private MenschDatenKonkret mdkToModifyOrDelete;
+        private InterfaceMenschRealDatenDao myMenschDatenDao;
         private List<MenschDatenKonkret> menschDaten;
         private String[] columns = {
             "id",
@@ -821,7 +860,6 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         }
 
         @Override
-
         public int getRowCount() {
             return menschDaten.size();
         }
@@ -872,9 +910,16 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         }
 
         public MenschDatenKonkret getMenschDatenKonkret(int rowIndex) {
+            mdkToModifyOrDelete = menschDaten.get(rowIndex);
             return menschDaten.get(rowIndex);
         }
 
+        public void deleteChoosenPerson() {
+            if (mdkToModifyOrDelete.getId() != null && mdkToModifyOrDelete.getId() > 0) {
+                myMenschDatenDao.delete(mdkToModifyOrDelete);
+            }
+            updateModel();
+        }
 //        @Override
 //        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 //            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -883,9 +928,25 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //        public void addTableModelListener(TableModelListener l) {
 //            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //        }
+
         @Override
         public void removeTableModelListener(TableModelListener l) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        private void updateModel() {
+            readAllMenschRealDaten();
+            fireTableDataChanged();
+            if (menschTableModel.getRowCount() > 0) {
+                menschTableModel.getValueAt(0, 0);
+                jTableMenschDaten.changeSelection(jTableMenschDaten.getRowCount() - 1, jTableMenschDaten.getRowCount() - 1,
+                        true, false);
+//                System.out.println("Ausgewählte Zeile: " + jTableMenschDaten.getSelectedRow());
+            }
+        }
+
+        private void readAllMenschRealDaten() {
+            menschDaten = (List<MenschDatenKonkret>) myMenschDatenDao.findAllMenschRealDaten();
         }
     }
 }

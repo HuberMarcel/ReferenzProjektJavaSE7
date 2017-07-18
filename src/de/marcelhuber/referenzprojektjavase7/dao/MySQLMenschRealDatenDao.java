@@ -31,6 +31,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         "zweitname",
         "geburtsdatum"
     };
+    private String tableName = "mensch";
 
     // Connection wird hier durch den INI-Block aufgebaut und empfangen
     {
@@ -46,7 +47,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
         List<MenschDatenKonkret> menschDaten = new ArrayList<>();
 
-        String sql = "SELECT * FROM `mensch`";
+        String sql = "SELECT * FROM `" + tableName + "`";
         try (ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
                 menschDaten.add(getMenschDatenFromResultSet(resultSet));
@@ -92,8 +93,17 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     @Override
-    public MenschDatenKonkret findMenschRealDatenById(int uid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public MenschDatenKonkret findMenschRealDatenById(int id) {
+        String sql = "SELECT * FROM `" + tableName + "` WHERE `id`='" + id + "'";
+
+        try (ResultSet resultSet = statement.executeQuery(sql)) {
+            if (resultSet.next()) {
+                return getMenschDatenFromResultSet(resultSet);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     @Override
@@ -103,7 +113,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         // Connection kann invalid sein
         // eigene Methode "pruefe, ob Connection neu erstellt werden muss" schreiben
         System.out.println("Connection (MySQLRealDatenDAO):            " + connection);
-        sql = "INSERT INTO `Mensch`"
+        sql = "INSERT INTO `" + tableName + "`"
                 + "("
                 + "`geburtsname`,"
                 + "`familienname`,"
@@ -118,18 +128,18 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 + "'" + mdk.getZweitname() + "', "
                 + "'" + mdk.getGeburtsDatumAsString() + "'"
                 + ")";
-
         System.out.println(sql);
         return modifiziere(sql);
     }
 
     @Override
-    public void delete(MenschDatenKonkret mrD) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(MenschDatenKonkret mdk) {
+        String sql = "DELETE FROM `" + tableName + "` WHERE `id`='" + mdk.getId() + "'";
+        modifiziere(sql);
     }
 
     @Override
-    public void update(MenschDatenKonkret mrD) {
+    public void update(MenschDatenKonkret mdk) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
