@@ -18,6 +18,7 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
         private String familienname;
         private String vorname;
         private String zweitname;
+
         // der Zweitname ist optional, wir wollen später aber keine
         // null-Einträge in die DB schreiben; daher initialisieren wir
         // ihn immer als leeren String
@@ -129,5 +130,16 @@ public class MenschDatenKonkret extends MenschDatenAbstrakt implements Cloneable
             System.out.println("Exception: " + cnsex);
         }
         return returnObject;
+    }
+
+    private Integer id;      // wir brauchen die ID nur später für die DB, deswegen 
+    // erlauben wir es generell, dass sie den Wert "null" hat
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

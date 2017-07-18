@@ -31,8 +31,9 @@ public class GrundschulVerwaltungStartMVC {
 
     private GrundschulVerwaltungView getView() {
 //        return new GrundschulVerwaltungGUI();
-        return new GrundschulVerwaltungGUI02();
+//        return new GrundschulVerwaltungGUI02();
 //        return new GrundschulVerwaltungGUI03();
+        return new GrundschulVerwaltungGUI04();
     }
 
 }

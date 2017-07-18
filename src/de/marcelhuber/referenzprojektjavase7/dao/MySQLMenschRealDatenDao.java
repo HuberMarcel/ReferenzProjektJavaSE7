@@ -17,7 +17,7 @@ import java.util.List;
  * @author Marcel Huber
  */
 public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
-
+    
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
@@ -36,16 +36,16 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     {
         initConnectionAndStatement();
     }
-
+    
     private void initConnectionAndStatement() {
         connection = MySQLDBConnection.INSTANCE.getConnection();
         statement = MySQLDBConnection.INSTANCE.getStatement();
     }
-
+    
     @Override
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
         List<MenschDatenKonkret> menschDaten = new ArrayList<>();
-
+        
         String sql = "SELECT * FROM `mensch`";
         try (ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
@@ -54,19 +54,20 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
+        
         return menschDaten;
     }
-
+    
     private MenschDatenKonkret getMenschDatenFromResultSet(ResultSet resultSet) throws SQLException {
         System.out.println("Neuer Datensatz:");
+        System.out.println("id:            " + resultSet.getString(columns[0]));
         System.out.println("Geburtsname:   " + resultSet.getString(columns[1]));
         System.out.println("Familiennname: " + resultSet.getString(columns[2]));
         System.out.println("Vorname:       " + resultSet.getString(columns[3]));
         System.out.println("Zweitname:     " + resultSet.getString(columns[4]));
         System.out.println("Geburtsdatum:  " + resultSet.getString(columns[5]));
         System.out.println("");
-
+        
         Calendar birthdayOfMdkDummy = Calendar.getInstance();
 //        System.out.println(resultSet.getString(columns[5]));
         String[] birthdayAsStringArray = resultSet.getString(columns[5]).split("\\.");
@@ -85,15 +86,16 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 .zweitname(resultSet.getString(columns[4]))
                 .geburtsDatum(birthdayOfMdkDummy)
                 .build();
+        mdkDummy.setId(resultSet.getInt(columns[0]));
         System.out.println(mdkDummy);
         return mdkDummy;
     }
-
+    
     @Override
     public MenschDatenKonkret findMenschRealDatenById(int uid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public int create(MenschDatenKonkret mdk) {
         connectionIsLost = MySQLDBConnection.INSTANCE.checkIfConnectionIsLost();
@@ -116,21 +118,21 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
                 + "'" + mdk.getZweitname() + "', "
                 + "'" + mdk.getGeburtsDatumAsString() + "'"
                 + ")";
-
+        
         System.out.println(sql);
         return modifiziere(sql);
     }
-
+    
     @Override
     public void delete(MenschDatenKonkret mrD) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void update(MenschDatenKonkret mrD) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     private int modifiziere(String sql) {
         int numberOfnewPersons = 0;
         try {
@@ -141,7 +143,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         }
         return numberOfnewPersons;
     }
-
+    
     public void closeConnection() {
         MySQLDBConnection.INSTANCE.closeConnection();
     }
