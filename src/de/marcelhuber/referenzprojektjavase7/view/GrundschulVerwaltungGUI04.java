@@ -68,6 +68,22 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jDialogGeburtstagUnsinnig = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanelFixMensch = new javax.swing.JPanel();
+        jTextGeburtsname = new javax.swing.JTextField();
+        jLabelGeburtsname = new javax.swing.JLabel();
+        jLabelFamilienname = new javax.swing.JLabel();
+        jTextFamilienname = new javax.swing.JTextField();
+        jLabelVorname = new javax.swing.JLabel();
+        jTextVorname = new javax.swing.JTextField();
+        jLabelZweitname = new javax.swing.JLabel();
+        jTextZweitname = new javax.swing.JTextField();
+        jLabelGeburtsdatum = new javax.swing.JLabel();
+        jFormattedTextMenschGeburtsdatum = new javax.swing.JFormattedTextField();
+        jPanelDirektor = new javax.swing.JPanel();
+        jScrollPanelDirektor = new javax.swing.JScrollPane();
+        jListUnterrichtsfaecher = new javax.swing.JList();
+        jCheckBoxUnterrichtsfaecher = new javax.swing.JCheckBox();
+        jButtonCreatePerson = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemLogin = new javax.swing.JMenuItem();
@@ -91,6 +107,169 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
         jTable1.setModel(menschTableModel);
         jScrollPane1.setViewportView(jTable1);
+
+        jTextGeburtsname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jTextGeburtsname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextGeburtsnameFocusGained(evt);
+            }
+        });
+        jTextGeburtsname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextGeburtsnameActionPerformed(evt);
+            }
+        });
+
+        jLabelGeburtsname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jLabelGeburtsname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGeburtsname.setText("Geburtsname*");
+
+        jLabelFamilienname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jLabelFamilienname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFamilienname.setText("Familienname*");
+
+        jTextFamilienname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jTextFamilienname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFamiliennameFocusGained(evt);
+            }
+        });
+
+        jLabelVorname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jLabelVorname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelVorname.setText("Vorname*");
+
+        jTextVorname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jTextVorname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextVornameFocusGained(evt);
+            }
+        });
+        jTextVorname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextVornameActionPerformed(evt);
+            }
+        });
+
+        jLabelZweitname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jLabelZweitname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelZweitname.setText("Zweitname");
+
+        jTextZweitname.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jTextZweitname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextZweitnameFocusGained(evt);
+            }
+        });
+
+        jLabelGeburtsdatum.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jLabelGeburtsdatum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelGeburtsdatum.setText("Geburtsdatum*");
+
+        jFormattedTextMenschGeburtsdatum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        jFormattedTextMenschGeburtsdatum.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jFormattedTextMenschGeburtsdatum.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFormattedTextMenschGeburtsdatumFocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelFixMenschLayout = new javax.swing.GroupLayout(jPanelFixMensch);
+        jPanelFixMensch.setLayout(jPanelFixMenschLayout);
+        jPanelFixMenschLayout.setHorizontalGroup(
+            jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFixMenschLayout.createSequentialGroup()
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelFamilienname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelVorname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelZweitname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelGeburtsname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelGeburtsdatum, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                    .addComponent(jTextZweitname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextVorname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFamilienname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextGeburtsname, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap())
+        );
+        jPanelFixMenschLayout.setVerticalGroup(
+            jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFixMenschLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGeburtsname)
+                    .addComponent(jTextGeburtsname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFamilienname)
+                    .addComponent(jTextFamilienname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelVorname)
+                    .addComponent(jTextVorname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelZweitname)
+                    .addComponent(jTextZweitname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelFixMenschLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGeburtsdatum)
+                    .addComponent(jFormattedTextMenschGeburtsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(283, 283, 283))
+        );
+
+        jListUnterrichtsfaecher.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jListUnterrichtsfaecher.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Fach 01", "Fach 02", "Fach 03" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPanelDirektor.setViewportView(jListUnterrichtsfaecher);
+
+        jCheckBoxUnterrichtsfaecher.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jCheckBoxUnterrichtsfaecher.setText("Unterrichtsfächer");
+        jCheckBoxUnterrichtsfaecher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxUnterrichtsfaecherActionPerformed(evt);
+            }
+        });
+
+        jButtonCreatePerson.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
+        jButtonCreatePerson.setText("Neue Person anlegen");
+        jButtonCreatePerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreatePersonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelDirektorLayout = new javax.swing.GroupLayout(jPanelDirektor);
+        jPanelDirektor.setLayout(jPanelDirektorLayout);
+        jPanelDirektorLayout.setHorizontalGroup(
+            jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                        .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDirektorLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCreatePerson)))
+                .addContainerGap())
+        );
+        jPanelDirektorLayout.setVerticalGroup(
+            jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxUnterrichtsfaecher)
+                    .addComponent(jScrollPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonCreatePerson)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
 
         jMenuUserLogin.setText("User-Login");
 
@@ -120,11 +299,26 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelFixMensch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelDirektor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 477, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(206, 206, 206)
+                    .addComponent(jPanelFixMensch, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(200, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 469, Short.MAX_VALUE)
+                    .addComponent(jPanelDirektor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -157,6 +351,126 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //                throw new AssertionError();
 //        }
     }//GEN-LAST:event_jMenuItemLoginActionPerformed
+
+    private void jTextGeburtsnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextGeburtsnameFocusGained
+        jTextGeburtsname.selectAll();
+    }//GEN-LAST:event_jTextGeburtsnameFocusGained
+
+    private void jTextGeburtsnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextGeburtsnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextGeburtsnameActionPerformed
+
+    private void jTextFamiliennameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFamiliennameFocusGained
+        jTextFamilienname.selectAll();
+    }//GEN-LAST:event_jTextFamiliennameFocusGained
+
+    private void jTextVornameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextVornameFocusGained
+        jTextVorname.selectAll();
+    }//GEN-LAST:event_jTextVornameFocusGained
+
+    private void jTextVornameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextVornameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextVornameActionPerformed
+
+    private void jTextZweitnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextZweitnameFocusGained
+        jTextZweitname.selectAll();
+    }//GEN-LAST:event_jTextZweitnameFocusGained
+
+    private void jFormattedTextMenschGeburtsdatumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextMenschGeburtsdatumFocusGained
+        jFormattedTextMenschGeburtsdatum.selectAll();
+    }//GEN-LAST:event_jFormattedTextMenschGeburtsdatumFocusGained
+
+    private boolean kontrolliereDieTextfelderDerGui() {
+//        System.out.println("Alter in createMenschDatenKonkret(): " + alter);
+        checkTheInformations((byte) 1);
+        // die obige Funktion kann sorgt immer dafür, dass, falls Felder geändert
+        // wurden, der neue Eintrag in die MenschDatenKonkret übernommen wird
+        // ihr eigentlicher ursprünglicher Sinn war es, leere Felder zu 
+        // lokalisieren und zu markieren
+        boolean everyNecessaryTextFieldIsFilled = true;
+        if (checkStringAndRequestFocusIfNecessary(jTextGeburtsname).length() == 0) {
+            everyNecessaryTextFieldIsFilled = false;
+            checkTheInformations((byte) 1);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jTextFamilienname).length() == 0) {
+            everyNecessaryTextFieldIsFilled = false;
+            checkTheInformations((byte) 2);
+        }
+        if (checkStringAndRequestFocusIfNecessary(jTextVorname).length() == 0) {
+            everyNecessaryTextFieldIsFilled = false;
+            checkTheInformations((byte) 3);
+        }
+        // das Feld Zweitname ist nur optional, daher hier auskommentiert
+//        if (checkStringAndRequestFocusIfNecessary(jTextZweitname).length() == 0) {
+//            everyNecessaryTextFieldIsFilled = false;
+//            checkTheInformations((byte) 4);
+//        }
+        if (checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum).length() == 0) {
+            everyNecessaryTextFieldIsFilled = false;
+            checkTheInformations((byte) 5);
+        }
+//        Marker.marker();
+        if (everyNecessaryTextFieldIsFilled) {
+//            System.out.println(birthdayIsChecked());
+//            if (birthdayIsChecked()) {
+            // kein Objekt erzeugen, sondern Controller informieren
+            // Controller holt die Daten ab, und erzeugt das entsprechende DAO
+            // der Rest wird vom DAO erledigt
+//                alter Code
+            mdk = new MenschDatenKonkret.Builder()
+                    .geburtsname(geburtsname)
+                    .familienname(familienname)
+                    .vorname(vorname)
+                    .zweitname(zweitname)
+                    //                        .geburtsDatum(geburtsdatum) // String in Calendar-Objekt konvertieren
+                    .build();
+//                System.out.println("Menschdaten (in GUI02): " + mdk);
+            System.out.println("GUI02 - Geburtsdatum: " + geburtsdatum);
+            if (gsVController.checkTheBirthdayInformations()) {
+                return true;
+            } else {
+                showInformation("Unsinniges Geburtsdatum, "
+                        + "die Person soll " + gsVController.getAlterFromModell() + " "
+                        + "Jahre alt sein?", "error");
+                jFormattedTextMenschGeburtsdatum.requestFocus();
+                return false;
+            }
+        } else {
+            // die folgende erste Codezeile dient nur zur Sicherheit, falls 
+            // jemand in der Zwischenzeit doch per Hand jemand ein Textfeld 
+            // geändert/geleert hat
+            checkTheInformations((byte) 1);
+            return false;
+        }
+    }
+
+    private void jCheckBoxUnterrichtsfaecherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxUnterrichtsfaecherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxUnterrichtsfaecherActionPerformed
+
+    private void jButtonCreatePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreatePersonActionPerformed
+        //        System.out.println("textfeldNummer in jButtonCreatePersonActionPerformed: "
+        //                + textfeldNummer);
+        if (textfeldNummer == null) {
+            textfeldNummer = 1;
+        }
+        if (textfeldNummer != 0) {
+            // vielleicht noch Dialogfenster, dass Daten einzutragen sind,
+            // ergänzen
+            textfeldNummer = checkTheInformations(textfeldNummer);
+            if (textfeldNummer == 0 && kontrolliereDieTextfelderDerGui()) {
+                gsVController.checkMenschDatenKonkretAndTryToSave();
+                //                System.out.println("Zweitname 1:" + zweitname);
+            }
+        } else {
+            if (kontrolliereDieTextfelderDerGui()) {
+                gsVController.checkMenschDatenKonkretAndTryToSave();
+                //                System.out.println("Zweitname 2:" + zweitname);
+            }
+        }
+
+
+    }//GEN-LAST:event_jButtonCreatePersonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,15 +508,31 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCreatePerson;
+    private javax.swing.JCheckBox jCheckBoxUnterrichtsfaecher;
     private javax.swing.JDialog jDialogGeburtstagUnsinnig;
+    private javax.swing.JFormattedTextField jFormattedTextMenschGeburtsdatum;
+    private javax.swing.JLabel jLabelFamilienname;
+    private javax.swing.JLabel jLabelGeburtsdatum;
+    private javax.swing.JLabel jLabelGeburtsname;
+    private javax.swing.JLabel jLabelVorname;
+    private javax.swing.JLabel jLabelZweitname;
+    private javax.swing.JList jListUnterrichtsfaecher;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemLogin;
     private javax.swing.JMenuItem jMenuItemRaumbelegung;
     private javax.swing.JMenuItem jMenuItemStundenplaene;
     private javax.swing.JMenu jMenuOptionales;
     private javax.swing.JMenu jMenuUserLogin;
+    private javax.swing.JPanel jPanelDirektor;
+    private javax.swing.JPanel jPanelFixMensch;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPanelDirektor;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFamilienname;
+    private javax.swing.JTextField jTextGeburtsname;
+    private javax.swing.JTextField jTextVorname;
+    private javax.swing.JTextField jTextZweitname;
     // End of variables declaration//GEN-END:variables
 
     private GrundschulVerwaltungController gsVController;
@@ -286,6 +616,55 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     @Override
     public void showInformation(String hinweis, String hinweisTyp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private byte checkTheInformations(byte b) {
+//        Marker.marker();
+        switch (b) {
+            case 1:
+                geburtsname = checkStringAndRequestFocusIfNecessary(jTextGeburtsname);
+                if (geburtsname.length() == 0) {
+                    return 1;
+                }
+//                break;
+            case 2:
+                familienname = checkStringAndRequestFocusIfNecessary(jTextFamilienname);
+                if (familienname.length() == 0) {
+                    return 2;
+                }
+//                break;
+            case 3:
+                vorname = checkStringAndRequestFocusIfNecessary(jTextVorname);
+                if (vorname.length() == 0) {
+                    return 3;
+                }
+//                break;
+//            case 4:
+                zweitname = checkStringAndRequestFocusIfNecessary(jTextZweitname);
+//                if (zweitname.length() == 0) {
+//                    return 4;
+//                }
+////                break;
+            case 5:
+                geburtsdatum = checkStringAndRequestFocusIfNecessary(jFormattedTextMenschGeburtsdatum);
+                if (geburtsdatum.length() == 0) {
+                    return 5;
+                }
+            default:
+                textfeldNummer = 0;
+                return textfeldNummer;
+//                throw new AssertionError();
+        }
+    }
+
+    private String checkStringAndRequestFocusIfNecessary(JTextField textfeld) {
+        String eingabeText = textfeld.getText().trim();
+        textfeld.setText(eingabeText);
+        if (eingabeText.length() == 0) {
+            textfeld.requestFocus();
+            textfeld.selectAll();
+        }
+        return eingabeText;
     }
 
 //    class MenschTableModel implements TableModel {
