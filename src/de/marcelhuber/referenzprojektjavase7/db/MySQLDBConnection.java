@@ -45,7 +45,7 @@ public enum MySQLDBConnection {
 //            System.out.println("Where Am I? " + new File("").getAbsolutePath());
 //            PressEnter.toContinue();
         } catch (IOException ioEx) {
-            System.out.println(ioEx);
+            System.err.println(ioEx);
             ioEx.printStackTrace();
         }
 
@@ -63,6 +63,7 @@ public enum MySQLDBConnection {
 //            Connection connection2 = DriverManager.getConnection(url, user, pass);
             // mit dem Connection-Objekt können wir (versuchen,)  ein Statement (zu) erzeugen
             statement = connection.createStatement();
+            connectionIsLost = false;
             System.out.println("MySQL-Verbindung erfolgreich hergestellt!");
             System.out.println("Connection: " + connection);
 //            System.out.println("Connection2: " + connection2);
@@ -71,6 +72,7 @@ public enum MySQLDBConnection {
             System.out.println("Connection (Klasse MySQLDBConnection): " + connection);
             System.err.println(sqlex);
             sqlex.printStackTrace();
+            connectionIsLost = true;
         }
     }
 
@@ -87,18 +89,17 @@ public enum MySQLDBConnection {
 //        return anotherConnection;
 //    }
     public Connection getConnection() {
-        System.out.println("getConnection");
-        System.out.println("Connection:" + connection);
-//        PressEnter.toContinue();
+        System.out.println("(MySQLDBConnection) getConnection() ");
+        System.out.println("(MySQLDBConnection) Connection:     " + connection);
         // bessere Alternative zu getAnotherConnection
-        connectionIsLost = checkIfConnectionIsLost();
+        connectionIsLost = getConnectionIsLost();
         System.out.println("connectionIsLost (MySQLDBConnection): " + connectionIsLost);
-        if (connectionIsLost) {
-            initParameter();
-        }
 //        finally {
 //            System.out.println("Connection: " + connection);
 //        }
+        if (connectionIsLost) {
+            initParameter();
+        }
         return connection;
     }
 
@@ -140,7 +141,7 @@ public enum MySQLDBConnection {
         dropTable(table);
     }
 
-    public boolean checkIfConnectionIsLost() {
+    public boolean getConnectionIsLost() {
         try {
             if (connection == null || connection.isClosed() || !connection.isValid(1000)) {
                 return connectionIsLost = true;

@@ -17,7 +17,7 @@ public interface InterfaceMenschRealDatenDao {
     // liefert die Anzahl der modifizierten Datensätze zurück, hier erstmal
     // 0 bei Fehlschlag, 1 bei Erfolg
 
-    void delete(MenschDatenKonkret mrD);
+    boolean delete(MenschDatenKonkret mrD);
 
     void update(MenschDatenKonkret mrD);
 }

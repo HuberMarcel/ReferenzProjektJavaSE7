@@ -1,6 +1,7 @@
 package de.marcelhuber.referenzprojektjavase7.controller;
 
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
+import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.model.*;
 import de.marcelhuber.referenzprojektjavase7.view.*;
@@ -15,12 +16,14 @@ public class GrundschulVerwaltungController implements Observer {
 
     private GrundschulVerwaltungGesamtModel gsVgModel;
     private GrundschulVerwaltungView gsVView;
+    private InterfaceMenschRealDatenDao mrdDao;
 
     // MVC mit main()-Klasse als Starter (im OCP-Bsp.)
     public GrundschulVerwaltungController(GrundschulVerwaltungGesamtModel gsVgModel,
             GrundschulVerwaltungView gsVView) {
         this.gsVgModel = gsVgModel;
         this.gsVView = gsVView;
+        mrdDao = gsVgModel.getMenschRealDatenDao();
         gsVView.setController(this);
         gsVgModel.addObserver(this);
     }
@@ -84,6 +87,25 @@ public class GrundschulVerwaltungController implements Observer {
         } else {
             gsVView.showInformation("Daten konnten nicht gespeichert werden!", "error");
         }
+    }
+
+    public boolean tryToDelete(MenschDatenKonkret mdk) {
+        boolean mdkIsDeleted = mrdDao.delete(mdk);
+        if (!mdkIsDeleted) {
+            return false;
+        }
+        return true;
+    }
+
+    public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
+        if (!((MySQLMenschRealDatenDao) mrdDao).getConnectionIsValid()) {
+            mrdDao = gsVgModel.getMenschRealDatenDao();
+        }
+        return mrdDao.findAllMenschRealDaten();
+    }
+
+    public InterfaceMenschRealDatenDao getMenschRealDatenDao() {
+        return mrdDao;
     }
 
     private MenschDatenKonkret buildMenschDatenKonkretWithDataFromView() {

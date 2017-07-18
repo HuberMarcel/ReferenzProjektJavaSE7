@@ -45,6 +45,9 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
+        if (connectionIsLost) {
+            initConnectionAndStatement();
+        }
         List<MenschDatenKonkret> menschDaten = new ArrayList<>();
 
         String sql = "SELECT * FROM `" + tableName + "`";
@@ -108,7 +111,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     @Override
     public int create(MenschDatenKonkret mdk) {
-        connectionIsLost = MySQLDBConnection.INSTANCE.checkIfConnectionIsLost();
+        connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
         System.out.println("connection is lost: " + connectionIsLost);
         // Connection kann invalid sein
         // eigene Methode "pruefe, ob Connection neu erstellt werden muss" schreiben
@@ -133,9 +136,14 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     @Override
-    public void delete(MenschDatenKonkret mdk) {
+    public boolean delete(MenschDatenKonkret mdk) {
         String sql = "DELETE FROM `" + tableName + "` WHERE `id`='" + mdk.getId() + "'";
-        modifiziere(sql);
+        int numberOfDeletedPersons = modifiziere(sql);
+        if (numberOfDeletedPersons == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override
@@ -156,5 +164,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     public void closeConnection() {
         MySQLDBConnection.INSTANCE.closeConnection();
+    }
+
+    public boolean getConnectionIsValid() {
+        if (connectionIsLost) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

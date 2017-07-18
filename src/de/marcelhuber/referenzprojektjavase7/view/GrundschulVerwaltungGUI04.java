@@ -7,14 +7,12 @@ import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungCont
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
-import de.marcelhuber.systemtools.Pause;
-import de.marcelhuber.systemtools.PressEnter;
+import java.awt.Color;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.TableModelListener;
@@ -434,6 +432,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     private void jFormattedTextMenschGeburtsdatumFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextMenschGeburtsdatumFocusGained
         jFormattedTextMenschGeburtsdatum.selectAll();
+        jFormattedTextMenschGeburtsdatum.setForeground(Color.BLACK);
     }//GEN-LAST:event_jFormattedTextMenschGeburtsdatumFocusGained
 
     // eigentlich sollte die GUI nur kontrollieren, ob die Einträge OK
@@ -637,6 +636,11 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         for (JTextField jTextField : alljTextFields) {
             jTextField.setText("");
         }
+        // die folgenden zwei Zeilen wegen eines Bugs im jFormattedTextField
+        // anscheinend wird der letzte sinnvolle Text temporär gespeichert
+        jFormattedTextMenschGeburtsdatum.setText("01.01.1800");
+        jFormattedTextMenschGeburtsdatum.setForeground(Color.RED);
+        geburtsdatum = jFormattedTextMenschGeburtsdatum.getText();
         jTextGeburtsname.requestFocus();
     }
 
@@ -838,7 +842,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     class MenschTableModel extends AbstractTableModel {
 
         private MenschDatenKonkret mdkToModifyOrDelete;
-        private InterfaceMenschRealDatenDao myMenschDatenDao;
+        // das TableModel und damit diese View benötigt das DAO 
+        // um alle Daten der Tabelle anzuzeigen
+        InterfaceMenschRealDatenDao mrdDao;
         private List<MenschDatenKonkret> menschDaten;
         private String[] columns = {
             "id",
@@ -850,13 +856,22 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         };
 
         public MenschTableModel() {
-            myMenschDatenDao = new MySQLMenschRealDatenDao();
+//            myMenschDatenDao = gsVController.getMenschRealDatenDao();
+            mrdDao = new MySQLMenschRealDatenDao();
             readAllMenschDaten();
         }
 
         private void readAllMenschDaten() {
-            menschDaten = (List<MenschDatenKonkret>) myMenschDatenDao.findAllMenschRealDaten();
-//            System.out.println(menschDaten);
+            boolean dataFromTableCanBeReaded = ((MySQLMenschRealDatenDao) mrdDao).getConnectionIsValid();
+//            System.out.println("Verbindungsprobleme? " + (!dataFromTableCanBeReaded));
+//            PressEnter.toContinue();
+            if (!dataFromTableCanBeReaded) {
+                if (menschDaten == null || menschDaten.size() == 0) {
+                    menschDaten = new ArrayList<>();
+                }
+            } else {
+                menschDaten = (List<MenschDatenKonkret>) mrdDao.findAllMenschRealDaten();
+            }
         }
 
         @Override
@@ -916,9 +931,18 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
         public void deleteChoosenPerson() {
             if (mdkToModifyOrDelete.getId() != null && mdkToModifyOrDelete.getId() > 0) {
-                myMenschDatenDao.delete(mdkToModifyOrDelete);
+                if (gsVController.tryToDelete(mdkToModifyOrDelete)) {
+                    updateModel();
+                    return;
+                }
+                showInformation("Person mit id " + mdkToModifyOrDelete.getId() + " konnte "
+                        + "nicht gelöscht werden!", "error");
+                updateModel();
+                return;
             }
+            showInformation("Fehler bei der id: " + mdkToModifyOrDelete.getId(), "error");
             updateModel();
+            return;
         }
 //        @Override
 //        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -946,7 +970,8 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         }
 
         private void readAllMenschRealDaten() {
-            menschDaten = (List<MenschDatenKonkret>) myMenschDatenDao.findAllMenschRealDaten();
+            menschDaten
+                    = (List<MenschDatenKonkret>) gsVController.findAllMenschRealDaten();
         }
     }
 }

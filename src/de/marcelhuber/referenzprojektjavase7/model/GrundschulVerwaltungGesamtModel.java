@@ -2,7 +2,6 @@ package de.marcelhuber.referenzprojektjavase7.model;
 
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.*;
-import de.marcelhuber.systemtools.PressEnter;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -158,7 +157,7 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     public int getAlter() {
         return alter;
     }
-
+    
     public MySQLMenschRealDatenDao getMenschRealDatenDao() {
         if (menschRealDatenDao == null) {
             menschRealDatenDao = new MySQLMenschRealDatenDao();
