@@ -41,6 +41,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     private void initConnectionAndStatement() {
         connection = MySQLDBConnection.INSTANCE.getConnection();
         statement = MySQLDBConnection.INSTANCE.getStatement();
+        connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
     }
 
     @Override
@@ -167,10 +168,19 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     public boolean getConnectionIsValid() {
+        connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
         if (connectionIsLost) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public Statement getStatement() {
+        return statement;
     }
 }

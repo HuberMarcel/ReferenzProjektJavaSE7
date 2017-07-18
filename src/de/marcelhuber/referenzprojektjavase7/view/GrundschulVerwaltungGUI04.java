@@ -7,6 +7,7 @@ import de.marcelhuber.referenzprojektjavase7.controller.GrundschulVerwaltungCont
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
+import de.marcelhuber.systemtools.Marker;
 import java.awt.Color;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -58,6 +59,8 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     public GrundschulVerwaltungGUI04() {
         menschTableModel = new MenschTableModel();
         initComponents();
+//      der button für die Connection dient nur zum Debuggen  
+        jButtonCheckConnection.setVisible(false);
         alljTextFields = new ArrayList<>();
         alljTextFields = new ArrayList<>();
         addEveryjTextField();
@@ -95,6 +98,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jCheckBoxUnterrichtsfaecher = new javax.swing.JCheckBox();
         jButtonCreatePerson = new javax.swing.JButton();
         jButtonDeletePersonFromTable = new javax.swing.JButton();
+        jButtonCheckConnection = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuUserLogin = new javax.swing.JMenu();
         jMenuItemLogin = new javax.swing.JMenuItem();
@@ -261,10 +265,17 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         });
 
         jButtonDeletePersonFromTable.setFont(new java.awt.Font("Vani", 0, 16)); // NOI18N
-        jButtonDeletePersonFromTable.setText("Ausgwählte Person löschen");
+        jButtonDeletePersonFromTable.setText("Ausgewählte Person löschen");
         jButtonDeletePersonFromTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeletePersonFromTableActionPerformed(evt);
+            }
+        });
+
+        jButtonCheckConnection.setText("CheckConnection");
+        jButtonCheckConnection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckConnectionActionPerformed(evt);
             }
         });
 
@@ -273,7 +284,11 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
         jPanelDirektorLayout.setHorizontalGroup(
             jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDirektorLayout.createSequentialGroup()
-                .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxUnterrichtsfaecher, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelDirektorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonCheckConnection)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDirektorLayout.createSequentialGroup()
@@ -294,7 +309,9 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonCreatePerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonDeletePersonFromTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelDirektorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonDeletePersonFromTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCheckConnection))))
         );
 
         jMenuUserLogin.setText("User-Login");
@@ -532,6 +549,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 
     private void jButtonDeletePersonFromTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletePersonFromTableActionPerformed
         selectedRowIndex = jTableMenschDaten.getSelectedRow();
+//        System.out.println("(GUI04) selectedRowIndex: " + selectedRowIndex);
         if (selectedRowIndex != -1) {
             menschTableModel.mdkToModifyOrDelete = menschTableModel.getMenschDatenKonkret(selectedRowIndex);
             menschTableModel.deleteChoosenPerson();
@@ -542,6 +560,10 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
     private void jTableMenschDatenFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTableMenschDatenFocusGained
         selectedRowIndex = jTableMenschDaten.getSelectedRow();
     }//GEN-LAST:event_jTableMenschDatenFocusGained
+
+    private void jButtonCheckConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckConnectionActionPerformed
+        gsVController.checkAndIfNecessaryResetConnection();
+    }//GEN-LAST:event_jButtonCheckConnectionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -579,6 +601,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCheckConnection;
     private javax.swing.JButton jButtonCreatePerson;
     private javax.swing.JButton jButtonDeletePersonFromTable;
     private javax.swing.JCheckBox jCheckBoxUnterrichtsfaecher;
@@ -866,6 +889,7 @@ public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements Gru
 //            System.out.println("Verbindungsprobleme? " + (!dataFromTableCanBeReaded));
 //            PressEnter.toContinue();
             if (!dataFromTableCanBeReaded) {
+                mrdDao = new MySQLMenschRealDatenDao();
                 if (menschDaten == null || menschDaten.size() == 0) {
                     menschDaten = new ArrayList<>();
                 }

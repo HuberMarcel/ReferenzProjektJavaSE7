@@ -6,7 +6,10 @@ import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.model.*;
 import de.marcelhuber.referenzprojektjavase7.view.*;
 import de.marcelhuber.systemtools.Marker;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -72,6 +75,7 @@ public class GrundschulVerwaltungController implements Observer {
 ////      Die folgenden zwei Zeilen sind alter Code
 //        MenschDatenKonkret mdk;
 //        mdk = gsVView.getMenschDatenKonkret();
+        checkAndIfNecessaryResetConnection();
         MenschDatenKonkret mdk = buildMenschDatenKonkretWithDataFromView();
         Marker.marker();
         Marker.marker();
@@ -90,6 +94,7 @@ public class GrundschulVerwaltungController implements Observer {
     }
 
     public boolean tryToDelete(MenschDatenKonkret mdk) {
+        checkAndIfNecessaryResetConnection();
         boolean mdkIsDeleted = mrdDao.delete(mdk);
         if (!mdkIsDeleted) {
             return false;
@@ -98,9 +103,11 @@ public class GrundschulVerwaltungController implements Observer {
     }
 
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
-        if (!((MySQLMenschRealDatenDao) mrdDao).getConnectionIsValid()) {
-            mrdDao = gsVgModel.getMenschRealDatenDao();
-        }
+//        System.out.println("(Controller) findAllMenschRealDaten()");
+//        System.out.println(mrdDao);
+        checkAndIfNecessaryResetConnection();
+        System.out.println("(Controller) findAllMenschRealDaten()");
+        System.out.println(mrdDao);
         return mrdDao.findAllMenschRealDaten();
     }
 
@@ -122,6 +129,15 @@ public class GrundschulVerwaltungController implements Observer {
 
     public void showView() {
         this.gsVView.showView();
+    }
+
+    public void checkAndIfNecessaryResetConnection() {
+        System.out.println("(Controller) checkAndIfNecessaryResetConnection");
+        System.out.println("Connection gut? " + gsVgModel.checkConnection());
+        if (!gsVgModel.checkConnection()) {
+            gsVgModel.resetMenschRealDatenDao();
+            mrdDao = gsVgModel.getMenschRealDatenDao();
+        }
     }
 
 //    public GrundschulVerwaltungGesamtModel getGsVgModel() {

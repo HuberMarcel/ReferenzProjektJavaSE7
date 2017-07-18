@@ -1,9 +1,13 @@
 package de.marcelhuber.referenzprojektjavase7.model;
 
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
+import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.*;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +20,7 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     private GrundschulLehrer grundschulLehrer;
     private GrundschulLehrerDaten grundschulLehrerDaten;
     private AdressDaten adressDaten;
-    private MySQLMenschRealDatenDao menschRealDatenDao;
+    private InterfaceMenschRealDatenDao menschRealDatenDao;
     private int minimalAlter;
     private int maximalAlter;
     private Integer alter;
@@ -70,8 +74,10 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
         // Speichern der MenschDaten in die Datenbank über das DAO
         // falls Speichern fehlschlägt (bspw. Verbindungsabbruch unerwartet)
         // --> menschDatenKonkret = null setzen, sonst menschDatenKonkret = mdk
-        MySQLMenschRealDatenDao mySQLmdkDAO = new MySQLMenschRealDatenDao();
-        if (mySQLmdkDAO.create(mdk) == 0) {
+        if (menschRealDatenDao == null) {
+            menschRealDatenDao = new MySQLMenschRealDatenDao();
+        }
+        if (menschRealDatenDao.create(mdk) == 0) {
             return false;
         } else {
             benachrichtige();
@@ -157,11 +163,27 @@ public class GrundschulVerwaltungGesamtModel extends Observable {
     public int getAlter() {
         return alter;
     }
-    
-    public MySQLMenschRealDatenDao getMenschRealDatenDao() {
+
+    public InterfaceMenschRealDatenDao getMenschRealDatenDao() {
         if (menschRealDatenDao == null) {
             menschRealDatenDao = new MySQLMenschRealDatenDao();
         }
         return menschRealDatenDao;
+    }
+
+    public void resetMenschRealDatenDao() {
+        menschRealDatenDao = new MySQLMenschRealDatenDao();
+    }
+
+    public boolean checkConnection() {
+        try {
+            System.out.println(((MySQLMenschRealDatenDao) menschRealDatenDao).getConnection().isValid(500));
+        } catch (SQLException ex) {
+            Logger.getLogger(GrundschulVerwaltungGesamtModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (!(((MySQLMenschRealDatenDao) menschRealDatenDao).getConnectionIsValid())) {
+            return false;
+        }
+        return true;
     }
 }

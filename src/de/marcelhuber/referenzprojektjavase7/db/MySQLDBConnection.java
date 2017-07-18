@@ -143,7 +143,7 @@ public enum MySQLDBConnection {
 
     public boolean getConnectionIsLost() {
         try {
-            if (connection == null || connection.isClosed() || !connection.isValid(1000)) {
+            if (connection == null || connection.isClosed() || !connection.isValid(500)) {
                 return connectionIsLost = true;
             }
         } catch (SQLException sqlex) {
