@@ -1,3 +1,4 @@
+// diese Klasse dient für den Start des Programms, gemäß des MVC-Modells
 package de.marcelhuber.referenzprojektjavase7.controller;
 // Hinweis: Nachfragen, ob diese "Starklasse" in ein eigenes Package gehört
 //          bzw. ausgelagert bzgl. der M-V-C packages...
@@ -10,6 +11,7 @@ import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungView;
 /**
  *
  * @author Marcel Huber
+ * letzte Änderung: 21.07.2017
  */
 public class GrundschulVerwaltungStartMVC {
 

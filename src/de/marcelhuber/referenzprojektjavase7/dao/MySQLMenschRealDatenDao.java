@@ -1,3 +1,5 @@
+// diese Klasse dient zum Start des Programms gemäß dem MVC-Modell
+// das Modell und die GUI (View) werden geladen und "verwaltet"
 package de.marcelhuber.referenzprojektjavase7.dao;
 
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
@@ -15,6 +17,7 @@ import java.util.List;
 /**
  *
  * @author Marcel Huber
+ * letzte Änderung: 21.07.2017
  */
 public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
@@ -38,12 +41,20 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         initConnectionAndStatement();
     }
 
+    // Initialisierung der Connection zur MySQL-Datenbank und bereitstellen/
+    //  kreieren des Statements
     private void initConnectionAndStatement() {
         connection = MySQLDBConnection.INSTANCE.getConnection();
         statement = MySQLDBConnection.INSTANCE.getStatement();
         connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
     }
 
+    /**
+     * Aus der MySQL-Datenbanktabelle (siehe tableName) werden die Daten der
+     * Tabelle in einer ArrayList abgespeichert und zurückgegeben
+     * @return eine ArrayList der "Mensch-Daten" aus der mySQL-Datenbanktabelle 
+     * 'tableName'
+    */
     @Override
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
         if (connectionIsLost) {
@@ -63,6 +74,14 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         return menschDaten;
     }
 
+    /**
+     * entsprechend der Spalten der mySQL-Tabell 'mensch' wird ein 
+     * 'MenschDatenKonkret'-Objekt erzeugt und zuückgegeben
+     * 
+     * @param resultSet: ein ResultSet aus der mySQL-Datenbanktabelle 'tableName'
+     * @return ein "MenschDatenKonkret"-Objekt 
+     * @throws SQLException 
+     */
     private MenschDatenKonkret getMenschDatenFromResultSet(ResultSet resultSet) throws SQLException {
         System.out.println("Neuer Datensatz:");
         System.out.println("id:            " + resultSet.getString(columns[0]));
@@ -77,6 +96,7 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 //        System.out.println(resultSet.getString(columns[5]));
         String[] birthdayAsStringArray = resultSet.getString(columns[5]).split("\\.");
 //        System.out.println(Arrays.toString(birthdayAsStringArray));
+        // der Eintrg der Datenbanktabelle sollte syntaktisch korrekt sein
         if (birthdayAsStringArray.length != 3) {
             throw new SQLException("Geburtstagsfeldeintrag fehlerhaft!");
         }
@@ -96,6 +116,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         return mdkDummy;
     }
 
+    /**
+     * innerhalb der Datenbanktabelle 'tableName' wird mithilfe der id eine
+     * Person gefunden, mithilfe der Daten aus der Datenbank dann ein 
+     * MenschDatenKonkret-Objekt erzeugt und dieses dann zurückgegeben
+     * @param id die id zum Auffinden einer Person in der Datenbanktabelle 'tableName'
+     * @return das zur id zugehörige MenschDatenKonkret-Objekt
+     */
     @Override
     public MenschDatenKonkret findMenschRealDatenById(int id) {
         String sql = "SELECT * FROM `" + tableName + "` WHERE `id`='" + id + "'";
@@ -110,6 +137,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         return null;
     }
 
+    /**
+     * ein MenschDatenKonkret-Objekt wird übergeben, um es in der Datenbanktabelle
+     * 'tableName' abzulegen
+     * @param mdk enthält die MenschDaten = Eckdaten eines Mensches als Objekt
+     * @return liefert 0 bei Misserfolg (Daten wurden nicht in der Tabell gespeichert)
+     * und 1 bei Erfolgt (Daten des mdk's wurden in die obige Tabelle gespeichert)
+     */
     @Override
     public int create(MenschDatenKonkret mdk) {
         connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
@@ -136,6 +170,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         return modifiziere(sql);
     }
 
+    /**
+     * Die Daten des Objekts mdk sollen in der Datenbank lokalisiert und dann 
+     * aus dieser entfernt werden
+     * @param mdk die Daten des zu löschenden Objekts/der zu löschenden Daten
+     * @return true, falls die Daten (anhand der id) in der Tabelle waren 
+     * und gelöscht werden konnten und false, falls das Löschen schiefgegangen ist
+     */
     @Override
     public boolean delete(MenschDatenKonkret mdk) {
         String sql = "DELETE FROM `" + tableName + "` WHERE `id`='" + mdk.getId() + "'";
@@ -147,11 +188,21 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         }
     }
 
+    /**
+     * noch zu implementieren: Daten eines Mensches aus der Datenbank sollen
+     * geupdatet werden können
+     * @param mdk 
+     */
     @Override
     public void update(MenschDatenKonkret mdk) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * hier wird das executeUpdate für entsprechende sql-Befehle gestartet
+     * @param sql der sql-Befehl für das executeUpdate
+     * @return 
+     */
     private int modifiziere(String sql) {
         int numberOfnewPersons = 0;
         try {
@@ -167,6 +218,11 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
         MySQLDBConnection.INSTANCE.closeConnection();
     }
 
+    /**
+     * prüfe, ob die Verbindung nicht null ist bzw. noch valide ist
+     * @return true, falls Verbindung da/valide ist; falls, bei Verbindungsproblem
+     * zur mySQL-Datenbank
+     */
     public boolean getConnectionIsValid() {
         connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
         if (connectionIsLost) {
@@ -175,11 +231,17 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
             return true;
         }
     }
-
+    /**
+     * liefert die Connection 
+     * @return die Connection
+     */
     public Connection getConnection() {
         return connection;
     }
-
+    /**
+     * liefert das Statement
+     * @return das statement der connection
+     */
     public Statement getStatement() {
         return statement;
     }

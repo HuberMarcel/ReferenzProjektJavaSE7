@@ -1,15 +1,11 @@
 package de.marcelhuber.referenzprojektjavase7.controller;
 
-import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.model.*;
 import de.marcelhuber.referenzprojektjavase7.view.*;
 import de.marcelhuber.systemtools.Marker;
-import java.sql.SQLException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,6 +44,7 @@ public class GrundschulVerwaltungController implements Observer {
         return gsVgModel.getAlter();
     }
 
+    
     public void checkMenschDatenKonkretAndTryToSave() {
         // Controller erzeugt Menschobjekt (MenschDaten) 
         // Controller ruft das Modell auf, und gibt Befehl zum Speichern
