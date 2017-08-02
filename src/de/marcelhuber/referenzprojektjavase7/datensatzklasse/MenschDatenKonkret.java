@@ -1,8 +1,6 @@
 package de.marcelhuber.referenzprojektjavase7.datensatzklasse;
 
-import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *

@@ -1,3 +1,4 @@
+// das Interface zur Übertragung der Daten eines Menschen
 package de.marcelhuber.referenzprojektjavase7.daointerface;
 
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
@@ -6,6 +7,7 @@ import java.util.Collection;
 /**
  *
  * @author Marcel Huber
+ * letzte Änderung: 02.08.2017
  */
 public interface InterfaceMenschRealDatenDao {
 

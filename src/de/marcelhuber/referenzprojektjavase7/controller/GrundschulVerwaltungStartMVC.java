@@ -11,7 +11,8 @@ import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungView;
 /**
  *
  * @author Marcel Huber
- * letzte Änderung: 21.07.2017
+ * Änderung: 21.07.2017
+ * letzte Änderung: 02.08.2017
  */
 public class GrundschulVerwaltungStartMVC {
 
@@ -24,8 +25,11 @@ public class GrundschulVerwaltungStartMVC {
     }
 
     private void go() {
+        // das Modell wird geladen
         gsVmodel = new GrundschulVerwaltungGesamtModel();
+        // die View wird abgeholt
         gsVView = getView();
+        // der Controller wird mit View und Modell ausgestattet
         gsVController = new GrundschulVerwaltungController(gsVmodel, gsVView);
 //
         gsVController.showView();

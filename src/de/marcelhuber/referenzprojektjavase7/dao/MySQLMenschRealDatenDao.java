@@ -17,7 +17,8 @@ import java.util.List;
 /**
  *
  * @author Marcel Huber
- * letzte Änderung: 21.07.2017
+ * Änderung: 21.07.2017
+ * letzte Änderung: 02.08.2017
  */
 public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 

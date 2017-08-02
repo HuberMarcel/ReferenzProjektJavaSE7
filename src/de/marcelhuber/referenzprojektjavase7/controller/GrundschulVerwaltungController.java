@@ -1,3 +1,4 @@
+// der Controller des Programms
 package de.marcelhuber.referenzprojektjavase7.controller;
 
 import de.marcelhuber.referenzprojektjavase7.daointerface.InterfaceMenschRealDatenDao;
@@ -10,6 +11,7 @@ import java.util.*;
 /**
  *
  * @author Marcel Huber
+ * letzte Änderung: 02.08.2017
  */
 public class GrundschulVerwaltungController implements Observer {
 

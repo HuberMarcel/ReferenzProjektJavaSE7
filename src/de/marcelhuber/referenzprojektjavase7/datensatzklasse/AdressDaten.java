@@ -1,3 +1,5 @@
+// in/mit dieser Klasse werden alle für einen Menschen als hier relevant erachteten
+// Daten verwaltet
 package de.marcelhuber.referenzprojektjavase7.datensatzklasse;
 
 //import com.sun.javafx.UnmodifiableArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  *
  * @author Marcel Huber
+ * letzte Änderung: 02.08.2017
  */
 public class AdressDaten {
 
@@ -203,6 +206,10 @@ public class AdressDaten {
         this.emailadressen = emailadressen;
     }
 
+    /**
+     * eine Emailadresse wird hinzugefügt
+     * @param emailadresse die Emailadresse, die hinzugefügt werden soll
+     */
     public void addEmailadresse(String emailadresse) {
         if (emailadressen == null) {
             emailadressen = new ArrayList<>();
@@ -210,12 +217,20 @@ public class AdressDaten {
         emailadressen.add(emailadresse);
     }
 
+    /**
+     * eine Emailadresse wird entfernt
+     * @param emailadresse die Emailadresse, die entfernt werden soll
+     */
     public void removeEmailadresse(String emailadresse) {
         if (emailadressen != null) {
             emailadressen.remove(emailadresse);
         }
     }
 
+    /**
+     * eine Telefonnummer wird hinzugefügt
+     * @param telefonnummer die Telefonnummer, die hinzugefügt werden soll
+     */
     public void addTelefonnummer(String telefonnummer) {
         if (telefonnummern == null) {
             telefonnummern = new ArrayList<>();
@@ -223,12 +238,21 @@ public class AdressDaten {
         telefonnummern.add(telefonnummer);
     }
 
+    /**
+     * Entfernen einer Telefonnummer
+     * @param telefonnummer die Telefonnummer, die zu entfernen ist
+     */
     public void removeTelefonnummer(String telefonnummer) {
         if (telefonnummern != null) {
             telefonnummern.remove(telefonnummer);
         }
     }
 
+    /**
+     * typische toString()-Methode
+     * @return die Informationen, die das Objekt beschreiben, in einem String
+     */
+    @Override
     public String toString() {
         String adressenInformationen;
         adressenInformationen = "Straße: " + strasse
