@@ -10,8 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Marcel Huber
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; letzte Änderung: 02.08.2017
  */
 public class AdressDaten {
 
@@ -208,6 +207,7 @@ public class AdressDaten {
 
     /**
      * eine Emailadresse wird hinzugefügt
+     *
      * @param emailadresse die Emailadresse, die hinzugefügt werden soll
      */
     public void addEmailadresse(String emailadresse) {
@@ -219,6 +219,7 @@ public class AdressDaten {
 
     /**
      * eine Emailadresse wird entfernt
+     *
      * @param emailadresse die Emailadresse, die entfernt werden soll
      */
     public void removeEmailadresse(String emailadresse) {
@@ -229,6 +230,7 @@ public class AdressDaten {
 
     /**
      * eine Telefonnummer wird hinzugefügt
+     *
      * @param telefonnummer die Telefonnummer, die hinzugefügt werden soll
      */
     public void addTelefonnummer(String telefonnummer) {
@@ -240,6 +242,7 @@ public class AdressDaten {
 
     /**
      * Entfernen einer Telefonnummer
+     *
      * @param telefonnummer die Telefonnummer, die zu entfernen ist
      */
     public void removeTelefonnummer(String telefonnummer) {
@@ -250,6 +253,7 @@ public class AdressDaten {
 
     /**
      * typische toString()-Methode
+     *
      * @return die Informationen, die das Objekt beschreiben, in einem String
      */
     @Override

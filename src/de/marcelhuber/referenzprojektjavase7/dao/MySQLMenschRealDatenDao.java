@@ -16,9 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Marcel Huber
- * Änderung: 21.07.2017
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; Änderung: 21.07.2017; letzte Änderung: 02.08.2017
  */
 public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
@@ -53,9 +51,10 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     /**
      * Aus der MySQL-Datenbanktabelle (siehe tableName) werden die Daten der
      * Tabelle in einer ArrayList abgespeichert und zurückgegeben
-     * @return eine ArrayList der "Mensch-Daten" aus der mySQL-Datenbanktabelle 
+     *
+     * @return eine ArrayList der "Mensch-Daten" aus der mySQL-Datenbanktabelle
      * 'tableName'
-    */
+     */
     @Override
     public Collection<MenschDatenKonkret> findAllMenschRealDaten() {
         if (connectionIsLost) {
@@ -76,12 +75,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     /**
-     * entsprechend der Spalten der mySQL-Tabell 'mensch' wird ein 
+     * entsprechend der Spalten der mySQL-Tabell 'mensch' wird ein
      * 'MenschDatenKonkret'-Objekt erzeugt und zuückgegeben
-     * 
-     * @param resultSet: ein ResultSet aus der mySQL-Datenbanktabelle 'tableName'
-     * @return ein "MenschDatenKonkret"-Objekt 
-     * @throws SQLException 
+     *
+     * @param resultSet: ein ResultSet aus der mySQL-Datenbanktabelle
+     * 'tableName'
+     * @return ein "MenschDatenKonkret"-Objekt
+     * @throws SQLException
      */
     private MenschDatenKonkret getMenschDatenFromResultSet(ResultSet resultSet) throws SQLException {
         System.out.println("Neuer Datensatz:");
@@ -119,9 +119,11 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     /**
      * innerhalb der Datenbanktabelle 'tableName' wird mithilfe der id eine
-     * Person gefunden, mithilfe der Daten aus der Datenbank dann ein 
+     * Person gefunden, mithilfe der Daten aus der Datenbank dann ein
      * MenschDatenKonkret-Objekt erzeugt und dieses dann zurückgegeben
-     * @param id die id zum Auffinden einer Person in der Datenbanktabelle 'tableName'
+     *
+     * @param id die id zum Auffinden einer Person in der Datenbanktabelle
+     * 'tableName'
      * @return das zur id zugehörige MenschDatenKonkret-Objekt
      */
     @Override
@@ -139,11 +141,13 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     /**
-     * ein MenschDatenKonkret-Objekt wird übergeben, um es in der Datenbanktabelle
-     * 'tableName' abzulegen
+     * ein MenschDatenKonkret-Objekt wird übergeben, um es in der
+     * Datenbanktabelle 'tableName' abzulegen
+     *
      * @param mdk enthält die MenschDaten = Eckdaten eines Mensches als Objekt
-     * @return liefert 0 bei Misserfolg (Daten wurden nicht in der Tabell gespeichert)
-     * und 1 bei Erfolgt (Daten des mdk's wurden in die obige Tabelle gespeichert)
+     * @return liefert 0 bei Misserfolg (Daten wurden nicht in der Tabell
+     * gespeichert) und 1 bei Erfolgt (Daten des mdk's wurden in die obige
+     * Tabelle gespeichert)
      */
     @Override
     public int create(MenschDatenKonkret mdk) {
@@ -172,11 +176,12 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     }
 
     /**
-     * Die Daten des Objekts mdk sollen in der Datenbank lokalisiert und dann 
+     * Die Daten des Objekts mdk sollen in der Datenbank lokalisiert und dann
      * aus dieser entfernt werden
+     *
      * @param mdk die Daten des zu löschenden Objekts/der zu löschenden Daten
-     * @return true, falls die Daten (anhand der id) in der Tabelle waren 
-     * und gelöscht werden konnten und false, falls das Löschen schiefgegangen ist
+     * @return true, falls die Daten (anhand der id) in der Tabelle waren und
+     * gelöscht werden konnten und false, falls das Löschen schiefgegangen ist
      */
     @Override
     public boolean delete(MenschDatenKonkret mdk) {
@@ -192,7 +197,8 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
     /**
      * noch zu implementieren: Daten eines Mensches aus der Datenbank sollen
      * geupdatet werden können
-     * @param mdk 
+     *
+     * @param mdk
      */
     @Override
     public void update(MenschDatenKonkret mdk) {
@@ -201,8 +207,9 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     /**
      * hier wird das executeUpdate für entsprechende sql-Befehle gestartet
+     *
      * @param sql der sql-Befehl für das executeUpdate
-     * @return 
+     * @return
      */
     private int modifiziere(String sql) {
         int numberOfnewPersons = 0;
@@ -221,8 +228,9 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
 
     /**
      * prüfe, ob die Verbindung nicht null ist bzw. noch valide ist
-     * @return true, falls Verbindung da/valide ist; falls, bei Verbindungsproblem
-     * zur mySQL-Datenbank
+     *
+     * @return true, falls Verbindung da/valide ist; falls, bei
+     * Verbindungsproblem zur mySQL-Datenbank
      */
     public boolean getConnectionIsValid() {
         connectionIsLost = MySQLDBConnection.INSTANCE.getConnectionIsLost();
@@ -232,15 +240,19 @@ public class MySQLMenschRealDatenDao implements InterfaceMenschRealDatenDao {
             return true;
         }
     }
+
     /**
-     * liefert die Connection 
+     * liefert die Connection
+     *
      * @return die Connection
      */
     public Connection getConnection() {
         return connection;
     }
+
     /**
      * liefert das Statement
+     *
      * @return das statement der connection
      */
     public Statement getStatement() {

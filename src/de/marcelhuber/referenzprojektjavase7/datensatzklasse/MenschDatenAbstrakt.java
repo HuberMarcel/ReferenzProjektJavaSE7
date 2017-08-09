@@ -9,8 +9,7 @@ import java.util.Locale;
 
 /**
  *
- * @author Marcel Huber
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; letzte Änderung: 02.08.2017
  */
 public abstract class MenschDatenAbstrakt {
 
@@ -54,6 +53,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Geburtsname wird zurückgegeben
+     *
      * @return geburtsname, der Geburtsname
      */
     public String getGeburtsname() {
@@ -62,7 +62,8 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Geburtsname wird gesetzt
-     * @param geburtsname, der zu setzende Geburtsname 
+     *
+     * @param geburtsname, der zu setzende Geburtsname
      */
     public void setGeburtsname(String geburtsname) {
         this.geburtsname = geburtsname;
@@ -70,6 +71,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Familienname wird abgeholt
+     *
      * @return familienname, der Familienname
      */
     public String getFamilienname() {
@@ -78,7 +80,8 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Familienname wird gesetzt
-     * @param familienname, der zu setzende Familienname 
+     *
+     * @param familienname, der zu setzende Familienname
      */
     public void setFamilienname(String familienname) {
         this.familienname = familienname;
@@ -86,6 +89,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Vorname wird abgeholt
+     *
      * @return vorname, der Vorname
      */
     public String getVorname() {
@@ -94,7 +98,8 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Vorname wird gesetzt
-     * @param vorname, der zu setzende Vorname 
+     *
+     * @param vorname, der zu setzende Vorname
      */
     public void setVorname(String vorname) {
         this.vorname = vorname;
@@ -102,6 +107,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Zweitname wird abgeholt
+     *
      * @return zweitname, der abzuholende Zweitname
      */
     public String getZweitname() {
@@ -110,7 +116,8 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * der Zweitname wird gesetzt
-     * @param zweitname, der zu setzende Zweitname 
+     *
+     * @param zweitname, der zu setzende Zweitname
      */
     public void setZweitname(String zweitname) {
         this.zweitname = zweitname;
@@ -118,6 +125,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * das Geburtsdatum als Calendar-Objekt wird abgeholt
+     *
      * @return geburtsDatum, das Geburtsdatum als Calendar-Objekt
      */
     public Calendar getGeburtsDatum() {
@@ -125,7 +133,8 @@ public abstract class MenschDatenAbstrakt {
     }
 
     /**
-      * das Geburtsdatum wird als String abgeholt
+     * das Geburtsdatum wird als String abgeholt
+     *
      * @return geburtsDatumAsString, das Geburtsdatum als String-Objekt
      */
     public String getGeburtsDatumAsString() {
@@ -139,6 +148,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * das Geburtsdatum wird durch ein Calendar-Objekt gesetzt
+     *
      * @param geburtsDatum, das zu setzende Geburtsdatum
      */
     public void setGeburtsDatum(Calendar geburtsDatum) {
@@ -147,6 +157,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * liefert das Date-Objekt zurück
+     *
      * @return date, das Date-Objekt
      */
     public Date getDate() {
@@ -155,6 +166,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * setzt das Date-Objekt
+     *
      * @param date, das zu setzende Date-Objekt
      */
     public void setDate(Date date) {
@@ -163,6 +175,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * liefert das entsprechende DateFormat-Objekt zurück
+     *
      * @return df, das DateFormat-Objekt
      */
     public DateFormat getDf() {
@@ -171,6 +184,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * setzt das DateFormat Objekt mittels df
+     *
      * @param df, das DateFormat-Objekt
      */
     public void setDf(DateFormat df) {
@@ -179,6 +193,7 @@ public abstract class MenschDatenAbstrakt {
 
     /**
      * Überschreibung der toString()-Methode aus der Klasse Object
+     *
      * @return den String mit den Informationen des Objekts, durch die es
      * beschrieben wird
      */
@@ -192,7 +207,7 @@ public abstract class MenschDatenAbstrakt {
         returnString += "Familienname: " + this.getFamilienname() + separationsZeichen
                 + "Geburtsname: " + this.getGeburtsname() + separationsZeichen;
         if (this.geburtsDatum != null) {
-            returnString += "Tag der Geburt: " 
+            returnString += "Tag der Geburt: "
                     + getGeburtsDatumAsString() + separationsZeichen;
         }
         return returnString;

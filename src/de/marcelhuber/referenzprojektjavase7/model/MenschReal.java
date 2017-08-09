@@ -6,7 +6,7 @@ import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class MenschReal {
 

@@ -3,7 +3,6 @@ package de.marcelhuber.referenzprojektjavase7.demos;
 import de.marcelhuber.referenzprojektjavase7.datensatzklasse.MenschDatenKonkret;
 import de.marcelhuber.referenzprojektjavase7.db.MySQLDBConnection;
 import de.marcelhuber.referenzprojektjavase7.dao.MySQLMenschRealDatenDao;
-import de.marcelhuber.systemtools.PressEnter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class MySQLMenschRealDatenDaoDemo {
 
@@ -99,12 +98,12 @@ public class MySQLMenschRealDatenDaoDemo {
         marcelsTagDerGeburt.set(1980, Calendar.DECEMBER, 27);
         MenschDatenKonkret marcelsDaten
                 = new MenschDatenKonkret.Builder()
-                .geburtsname("Huber")
-                .familienname("Huber")
-                .vorname("Marcel")
-                .zweitname("B.")
-                .geburtsDatum(marcelsTagDerGeburt)
-                .build();
+                        .geburtsname("Huber")
+                        .familienname("Huber")
+                        .vorname("Marcel")
+                        .zweitname("B.")
+                        .geburtsDatum(marcelsTagDerGeburt)
+                        .build();
         System.out.println(marcelsDaten);
         System.out.println(marcelsDaten.getGeburtsDatumAsString());
 //        PressEnter.toContinue();
@@ -121,10 +120,10 @@ public class MySQLMenschRealDatenDaoDemo {
         pascalsTagDerGeburt.set(1992, Calendar.SEPTEMBER, 15);
         MenschDatenKonkret pascalsDaten
                 = new MenschDatenKonkret.Builder()
-                .familienname("Huber")
-                .vorname("Pascal")
-                .geburtsDatum(pascalsTagDerGeburt)
-                .build();
+                        .familienname("Huber")
+                        .vorname("Pascal")
+                        .geburtsDatum(pascalsTagDerGeburt)
+                        .build();
         mySQLDummyInsertDao.create(pascalsDaten);
         MenschDatenKonkret mamasDaten
                 = (MenschDatenKonkret) marcelsDaten.clone();

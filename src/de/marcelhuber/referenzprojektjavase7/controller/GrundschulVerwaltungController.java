@@ -10,8 +10,7 @@ import java.util.*;
 
 /**
  *
- * @author Marcel Huber
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; letzte Änderung: 02.08.2017
  */
 public class GrundschulVerwaltungController implements Observer {
 
@@ -46,7 +45,6 @@ public class GrundschulVerwaltungController implements Observer {
         return gsVgModel.getAlter();
     }
 
-    
     public void checkMenschDatenKonkretAndTryToSave() {
         // Controller erzeugt Menschobjekt (MenschDaten) 
         // Controller ruft das Modell auf, und gibt Befehl zum Speichern

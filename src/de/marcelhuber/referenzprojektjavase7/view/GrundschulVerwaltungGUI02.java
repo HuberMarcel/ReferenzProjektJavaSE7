@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class GrundschulVerwaltungGUI02 extends javax.swing.JFrame implements GrundschulVerwaltungView {
 

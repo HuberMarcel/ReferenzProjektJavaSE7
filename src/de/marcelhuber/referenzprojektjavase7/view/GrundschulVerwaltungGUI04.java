@@ -21,7 +21,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class GrundschulVerwaltungGUI04 extends javax.swing.JFrame implements GrundschulVerwaltungView {
 

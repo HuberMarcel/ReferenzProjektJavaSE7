@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class GrundschulLehrer extends MenschReal {
 

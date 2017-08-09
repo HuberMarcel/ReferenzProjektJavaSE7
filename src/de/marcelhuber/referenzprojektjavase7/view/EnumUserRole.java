@@ -2,7 +2,7 @@ package de.marcelhuber.referenzprojektjavase7.view;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public enum EnumUserRole {
 
@@ -10,8 +10,7 @@ public enum EnumUserRole {
     KONTAKTPERSON("Kontaktperson"),
     EXTERN("Extern"),
     NONE(""),
-    BREAK("break"),
-    ;
+    BREAK("break"),;
     private boolean loginOK;
     private String userRole;
 

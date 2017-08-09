@@ -6,8 +6,7 @@ import java.util.Collection;
 
 /**
  *
- * @author Marcel Huber
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; letzte Änderung: 02.08.2017
  */
 public interface InterfaceMenschRealDatenDao {
 

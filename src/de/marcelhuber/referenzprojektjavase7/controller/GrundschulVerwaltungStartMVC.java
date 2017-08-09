@@ -10,9 +10,7 @@ import de.marcelhuber.referenzprojektjavase7.view.GrundschulVerwaltungView;
 
 /**
  *
- * @author Marcel Huber
- * Änderung: 21.07.2017
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; Änderung: 21.07.2017; letzte Änderung: 02.08.2017
  */
 public class GrundschulVerwaltungStartMVC {
 

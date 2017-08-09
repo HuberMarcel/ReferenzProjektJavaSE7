@@ -6,8 +6,7 @@ import java.util.Collection;
 
 /**
  *
- * @author Marcel Huber
- * letzte Änderung: 02.08.2017
+ * @author Marcel Huber; letzte Änderung: 02.08.2017
  */
 public interface InterfaceGrundschulLehrerDao {
 
@@ -33,17 +32,18 @@ public interface InterfaceGrundschulLehrerDao {
      * 1 bei Erfolg)
      */
     int create(GrundschulLehrer gsL);
-    
+
     /**
      * löschte einen Grundschullehrer (gsL)
-     * @param gsL der Grundschullehrer gsL, der gespeicher werden soll 
+     *
+     * @param gsL der Grundschullehrer gsL, der gespeicher werden soll
      * @return true, falls Löschung erfolgrich, false bei Fehlschlag
      */
     boolean delete(GrundschulLehrer gsL);
 
     /**
-     * 
-     * @param gsL der Grunschullehrer wird mit den Daten von gsL geupdatet 
+     *
+     * @param gsL der Grunschullehrer wird mit den Daten von gsL geupdatet
      */
     void update(GrundschulLehrer gsL);
 }

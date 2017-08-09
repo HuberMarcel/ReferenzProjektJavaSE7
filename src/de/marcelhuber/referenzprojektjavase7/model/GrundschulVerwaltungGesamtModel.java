@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Marcel Huber
+ * @author Marcel Huber; letzte Änderung: 09.08.2017
  */
 public class GrundschulVerwaltungGesamtModel extends Observable {
 
